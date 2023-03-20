@@ -139,7 +139,7 @@ Hotel.all.each do |hotel|
   10.times do
     rooms << {
       hotel_id: hotel.id,
-      room_type: Faker::Lorem.word,
+      room_name: Faker::Lorem.word,
       description: Faker::Lorem.paragraph,
       capacity: rand(1..10),
       price_per_night: rand(100..1000),
