@@ -1,6 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import axios from "axios";
 
+axios.get("/api/guests").then((res) => {
+  console.log(res.data);
+});
+axios.get("/api/rooms").then((res) => {
+  console.log(res.data);
+});
+axios.get("/api/hotels").then((res) => {
+  console.log(res.data);
+});
+axios.get("/api/bookings").then((res) => {
+  console.log(res.data);
+});
 function App() {
   return (
     <div className="App">

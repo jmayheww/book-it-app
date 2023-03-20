@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :hotels, only: %i[index show]
     resources :bookings, only: %i[index show]
     resources :rooms
-    resources :guests, only: %i[index show]
+    resources :guests
   end
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
