@@ -1,11 +1,9 @@
 class Api::HotelsController < ApplicationController
-  def index
-    hotels = Hotel.all
-    render json: hotels, status: :ok
-  end
+  include ApiResource
 
-  def show
-    hotel = Hotel.find(params[:id])
-    render json: hotel, status: :found
+  private
+
+  def model
+    Hotel
   end
 end

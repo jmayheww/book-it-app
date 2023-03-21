@@ -1,11 +1,9 @@
 class Api::BookingsController < ApplicationController
-  def index
-    bookings = Booking.all
-    render json: bookings, status: :ok
-  end
+  include ApiResource
 
-  def show
-    booking = Booking.find(params[:id])
-    render json: booking, status: :found
+  private
+
+  def model
+    Booking
   end
 end
