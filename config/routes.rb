@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     resources :hotels, only: %i[index show], shallow: true do
       resources :rooms, only: %i[index show]
     end
+
     resources :bookings
     resources :rooms
     resources :guests
+
     post '/signup', to: 'users#create'
     post '/login', to: 'session#create'
     delete '/logout', to: 'session#destroy'
