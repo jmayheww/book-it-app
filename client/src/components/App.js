@@ -1,0 +1,41 @@
+import React, { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar";
+
+import axios from "axios";
+
+axios.get("/api/guests").then((res) => {
+  console.log(res.data);
+});
+axios.get("/api/rooms").then((res) => {
+  console.log(res.data);
+});
+axios.get("/api/hotels").then((res) => {
+  console.log(res.data);
+});
+axios.get("/api/bookings").then((res) => {
+  console.log(res.data);
+});
+function App() {
+  return (
+    <div className="App">
+      <NavBar />
+      {/* <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" /> */}
+      <p>
+        Edit <code>src/App.js</code> and save to reload.
+      </p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn React
+      </a>
+      {/* </header> */}
+    </div>
+  );
+}
+
+export default App;
