@@ -15,4 +15,10 @@ class SessionsController < ApplicationController
     session.delete(:user_id)
     head :no_content
   end
+
+  private
+
+  def authorize
+    return render json: { error: 'Not authorized' }, status: :unauthorized unless session[:user_id]
+  end
 end
