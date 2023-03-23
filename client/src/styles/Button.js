@@ -50,4 +50,4 @@ const OutlineButton = styled(ButtonBase)`
   }
 `;
 
-export { Button };
+export default Button;
