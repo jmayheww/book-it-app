@@ -4,7 +4,6 @@ import { Button, Error, Input, FormField, Label } from "../styles";
 function LoginForm({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,7 +19,6 @@ function LoginForm({ onLogin }) {
       body: JSON.stringify({
         email,
         password,
-        passwordConfirmation,
       }),
     }).then((r) => {
       setIsLoading(false);

@@ -1,10 +1,7 @@
 class Api::UsersController < ApplicationController
-  include ApiResource
-
   rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
-  before_action :authenticate_user!, only: [:show]
+  rescue_from ActiveRecord::RecordNotUnique, with: :render_unique_violation_response
 
   def create
     new_user = User.create!(user_params)
@@ -14,9 +11,11 @@ class Api::UsersController < ApplicationController
 
   def show
     current_user = User.find_by(id: session[:user_id])
-    return render json: { error: 'Not authorized' }, status: :unauthorized unless current_user
-
-    render json: user, status: :found
+    if current_user
+      render json: current_user, status: :created
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
+    end
   end
 
   private
@@ -31,6 +30,11 @@ class Api::UsersController < ApplicationController
 
   def render_unprocessable_entity_response(exception)
     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def render_unique_violation_response(_exception)
+    error_message = "#{model} already exists"
+    render json: { error: error_message }, status: :unprocessable_entity
   end
 
   def model

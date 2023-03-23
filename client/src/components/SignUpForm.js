@@ -27,17 +27,21 @@ function SignUpForm({ onSignUp }) {
       body: JSON.stringify({
         email,
         password,
-        passwordConfirmation,
+        password_confirmation: passwordConfirmation,
       }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => onSignUp(user));
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((data) => {
+          data.errors ? setErrors([data.errors]) : setErrors([data.error]);
+        });
       }
     });
   }
+
+  console.log("errors: ", errors);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -75,9 +79,12 @@ function SignUpForm({ onSignUp }) {
         <Button type="submit">{isLoading ? "Loading..." : "Sign Up"} </Button>
       </FormField>
       <FormField>
+        /*{" "}
         {errors.map((error) => {
-          <Error key={error}>{error}</Error>;
-        })}
+          console.log("error: ", error);
+          return <Error key={error}>{error}</Error>;
+        })}{" "}
+        */
       </FormField>
     </form>
   );
