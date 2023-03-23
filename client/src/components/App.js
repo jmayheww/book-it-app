@@ -14,8 +14,7 @@ function App() {
 
     fetch("/api/hotels")
       .then((r) => r.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .then((data) => console.log(data));
   }, []);
 
   if (!user) return <Login onLogin={setUser} />;

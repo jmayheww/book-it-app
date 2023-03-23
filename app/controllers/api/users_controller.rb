@@ -15,6 +15,7 @@ class Api::UsersController < ApplicationController
       render json: current_user, status: :created
     else
       render json: { error: 'Not authorized' }, status: :unauthorized
+
     end
   end
 
