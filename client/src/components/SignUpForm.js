@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { Button, Error, Input, FormField, Label } from "../styles";
+import {
+  Button,
+  Error,
+  Input,
+  FormField,
+  Label,
+  Textarea,
+} from "../styles/index";
 
-function LoginForm({ onLogin }) {
+function SignUpForm({ onSignUp }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -12,7 +19,7 @@ function LoginForm({ onLogin }) {
     e.preventDefault();
     setErrors([]);
     setIsLoading(true);
-    fetch("/api/login", {
+    fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,11 +32,9 @@ function LoginForm({ onLogin }) {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        r.json().then((user) => onLogin(user));
+        r.json().then((user) => onSignUp(user));
       } else {
-        r.json().then((data) => {
-          setErrors((current) => [...current, data.error]);
-        });
+        r.json().then((err) => setErrors(err.errors));
       }
     });
   }
@@ -51,23 +56,31 @@ function LoginForm({ onLogin }) {
         <Input
           type="password"
           id="password"
-          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
         />
       </FormField>
       <FormField>
-        <Button variant="fill" color="primary" type="submit">
-          {isLoading ? "Loading..." : "Login"}
-        </Button>
+        <Label htmlFor="password">Password Confirmation</Label>
+        <Input
+          type="password"
+          id="password_confirmation"
+          value={passwordConfirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
+          autoComplete="current-password"
+        />
+      </FormField>
+      <FormField>
+        <Button type="submit">{isLoading ? "Loading..." : "Sign Up"} </Button>
       </FormField>
       <FormField>
         {errors.map((error) => {
-          return <Error key={error}>{error}</Error>;
+          <Error key={error}>{error}</Error>;
         })}
       </FormField>
     </form>
   );
 }
 
-export default LoginForm;
+export default SignUpForm;

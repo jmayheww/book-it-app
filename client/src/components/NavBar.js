@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "../styles/Button";
+import { Button } from "../styles/index";
 
 function NavBar() {
   function handleLogoutClick() {

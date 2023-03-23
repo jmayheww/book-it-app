@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
-
+import Login from "../pages/Login";
 function App() {
   const [user, setUser] = useState(null);
 
@@ -11,6 +11,11 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
+
+    fetch("/api/hotels")
+      .then((r) => r.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   }, []);
 
   if (!user) return <Login onLogin={setUser} />;
