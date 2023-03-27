@@ -1,13 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Button } from "../styles/index";
+import { Button, Divider } from "../styles/index";
 
-function NavBar() {
+function NavBar({ user, setUser }) {
+  const navigate = useNavigate();
+
   function handleLogoutClick() {
     fetch("/api/logout", { method: "DELETE" }).then((res) => {
       if (res.ok) {
-        console.log("logged out");
+        console.log("logout successful");
+        setUser(null);
+        navigate("/login");
       }
     });
   }
@@ -17,7 +21,11 @@ function NavBar() {
       <Logo>
         <Link to="/"> BookIt </Link>
       </Logo>
+      <Divider />
       <Nav>
+        <Button as={Link} to="/myaccount">
+          My Account
+        </Button>
         <Button as={Link} to="/hotels">
           Hotels
         </Button>
