@@ -33,7 +33,7 @@ function App() {
       <main>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/" element={<AsyncHome />} />
             <Route path="/home" element={<AsyncHome user={user} />} />
             <Route path="/myaccount" element={<AsyncMyAccount />} />
             <Route path="/hotels" element={<AsyncHotelsPage />} />
@@ -41,10 +41,7 @@ function App() {
             <Route path="*" element={<Navigate to="/home" />} />
 
             {!user && (
-              <Route
-                path="/login"
-                element={<AsyncLogin user={user} onLogin={setUser} />}
-              />
+              <Route path="/login" element={<AsyncLogin onLogin={setUser} />} />
             )}
           </Routes>
         </Suspense>

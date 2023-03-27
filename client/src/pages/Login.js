@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 import { Button, Divider } from "../styles/index";
 
-function Login({ user, onLogin }) {
+function Login({ onLogin }) {
   const [showLogin, setShowLogin] = useState(true);
-  const nav = useNavigate();
 
   return (
     <Wrapper>
@@ -51,11 +49,5 @@ const Wrapper = styled.section`
   margin: 40px auto;
   padding: 16px;
 `;
-
-// const Divider = styled.hr`
-//   border: none;
-//   border-bottom: 1px solid #ccc;
-//   margin: 16px 0;
-// `;
 
 export default Login;

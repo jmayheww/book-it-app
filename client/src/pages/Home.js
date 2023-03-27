@@ -1,6 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import Login from "./Login";
 
 function Home({ user }) {
   return (

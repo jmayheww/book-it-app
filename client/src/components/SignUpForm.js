@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Button,
-  Error,
-  Input,
-  FormField,
-  Label,
-  Textarea,
-} from "../styles/index";
+import { Button, Error, Input, FormField, Label } from "../styles/index";
 
 function SignUpForm({ onSignUp }) {
   const [email, setEmail] = useState("");
@@ -45,8 +38,6 @@ function SignUpForm({ onSignUp }) {
       }
     });
   }
-
-  console.log("errors: ", errors);
 
   return (
     <form onSubmit={handleSubmit}>
