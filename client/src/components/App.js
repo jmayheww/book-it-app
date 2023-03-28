@@ -33,15 +33,19 @@ function App() {
       <main>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<AsyncHome />} />
-            <Route path="/home" element={<AsyncHome user={user} />} />
-            <Route path="/myaccount" element={<AsyncMyAccount />} />
-            <Route path="/hotels" element={<AsyncHotelsPage />} />
-            <Route path="/logout" element={<AsyncLogout />} />
+            <Route exact path="/" element={<AsyncHome />} />
+            <Route exact path="/home" element={<AsyncHome user={user} />} />
+            <Route exact path="/myaccount" element={<AsyncMyAccount />} />
+            <Route exact path="/hotels" element={<AsyncHotelsPage />} />
+            <Route exact path="/logout" element={<AsyncLogout />} />
             <Route path="*" element={<Navigate to="/home" />} />
 
             {!user && (
-              <Route path="/login" element={<AsyncLogin onLogin={setUser} />} />
+              <Route
+                exact
+                path="/login"
+                element={<AsyncLogin onLogin={setUser} />}
+              />
             )}
           </Routes>
         </Suspense>

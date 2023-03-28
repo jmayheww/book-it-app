@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Divider } from "../styles/index";
 
-function NavBar({ user, setUser }) {
+function NavBar({ setUser }) {
   const navigate = useNavigate();
 
   function handleLogoutClick() {

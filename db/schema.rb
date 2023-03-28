@@ -10,76 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_230_320_055_945) do
+ActiveRecord::Schema.define(version: 2023_03_28_045751) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'bookings', force: :cascade do |t|
-    t.date 'start_date'
-    t.date 'end_date'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.bigint 'guest_id', null: false
-    t.bigint 'room_id', null: false
-    t.index ['guest_id'], name: 'index_bookings_on_guest_id'
-    t.index ['room_id'], name: 'index_bookings_on_room_id'
+  create_table "bookings", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "guest_id", null: false
+    t.bigint "room_id", null: false
+    t.index ["guest_id"], name: "index_bookings_on_guest_id"
+    t.index ["room_id"], name: "index_bookings_on_room_id"
   end
 
-  create_table 'guests', force: :cascade do |t|
-    t.string 'first_name'
-    t.string 'last_name'
-    t.string 'email'
-    t.integer 'phone_number'
-    t.string 'address'
-    t.string 'city'
-    t.string 'state'
-    t.string 'country'
-    t.integer 'age'
-    t.string 'gender'
-    t.string 'nationality'
-    t.string 'passport_number'
-    t.date 'date_of_birth'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.bigint 'user_id', null: false
-    t.index ['user_id'], name: 'index_guests_on_user_id'
+  create_table "hotels", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "country"
+    t.string "image_url"
+    t.text "description"
+    t.integer "rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'hotels', force: :cascade do |t|
-    t.string 'name'
-    t.string 'address'
-    t.string 'country'
-    t.string 'image_url'
-    t.text 'description'
-    t.integer 'rating'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "rooms", force: :cascade do |t|
+    t.string "room_name"
+    t.text "description"
+    t.integer "capacity"
+    t.integer "price_per_night"
+    t.boolean "is_available"
+    t.string "image_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "hotel_id", null: false
+    t.index ["hotel_id"], name: "index_rooms_on_hotel_id"
   end
 
-  create_table 'rooms', force: :cascade do |t|
-    t.string 'room_name'
-    t.text 'description'
-    t.integer 'capacity'
-    t.integer 'price_per_night'
-    t.boolean 'is_available'
-    t.string 'image_url'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.bigint 'hotel_id', null: false
-    t.index ['hotel_id'], name: 'index_rooms_on_hotel_id'
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "username"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "phone_number"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.integer "age"
+    t.string "nationality"
+    t.string "passport_number"
+    t.date "date_of_birth"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email'
-    t.string 'password_digest'
-    t.string 'username'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['email'], name: 'index_users_on_email', unique: true
-  end
-
-  add_foreign_key 'bookings', 'guests'
-  add_foreign_key 'bookings', 'rooms'
-  add_foreign_key 'guests', 'users'
-  add_foreign_key 'rooms', 'hotels'
+  add_foreign_key "bookings", "rooms"
+  add_foreign_key "rooms", "hotels"
 end
