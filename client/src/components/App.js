@@ -11,6 +11,7 @@ const AsyncLogout = React.lazy(() => import("../pages/Logout"));
 
 function App() {
   const [user, setUser] = useState(null);
+  const [showLogin, setShowLogin] = useState(true);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
     fetch("/api/hotels")
       .then((r) => r.json())
       .then((data) => console.log(data));
-  }, [nav]);
+  }, []);
 
   return (
     <div className="App">
@@ -38,15 +39,38 @@ function App() {
             <Route exact path="/myaccount" element={<AsyncMyAccount />} />
             <Route exact path="/hotels" element={<AsyncHotelsPage />} />
             <Route exact path="/logout" element={<AsyncLogout />} />
-            <Route path="*" element={<Navigate to="/home" />} />
 
             {!user && (
-              <Route
-                exact
-                path="/login"
-                element={<AsyncLogin onLogin={setUser} />}
-              />
+              <>
+                <Route
+                  exact
+                  path="/login"
+                  element={
+                    <AsyncLogin
+                      onLogin={setUser}
+                      showLogin={showLogin}
+                      setShowLogin={setShowLogin}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/signup"
+                  element={
+                    <AsyncLogin
+                      onLogin={setUser}
+                      showLogin={showLogin}
+                      setShowLogin={setShowLogin}
+                    />
+                  }
+                />
+                {/* Redirect to /login by default */}
+                <Route path="*" element={<Navigate to="/login" />} />
+              </>
             )}
+
+            {/* Redirect to /home if user is authenticated */}
+            {user && <Route path="*" element={<Navigate to="/home" />} />}
           </Routes>
         </Suspense>
       </main>
