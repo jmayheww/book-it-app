@@ -15,7 +15,16 @@ class Api::UsersController < ApplicationController
       render json: current_user, status: :created
     else
       render json: { error: 'Not authorized' }, status: :unauthorized
+    end
+  end
 
+  def update
+    current_user = User.find_by(id: session[:user_id])
+    if current_user
+      current_user.update!(profile_params)
+      render json: current_user, status: :created
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
     end
   end
 
@@ -23,6 +32,11 @@ class Api::UsersController < ApplicationController
 
   def user_params
     params.permit(:email, :password, :password_confirmation)
+  end
+
+  def profile_params
+    params.permit(:first_name, :last_name, :phone_number, :address, :city, :state, :country, :age, :nationality,
+                  :passport_number, :date_of_birth)
   end
 
   def render_record_not_found_response(exception)
