@@ -75,7 +75,6 @@
 # puts 'done seeding...'
 
 User.destroy_all
-Guest.destroy_all
 Hotel.destroy_all
 Room.destroy_all
 Booking.destroy_all
@@ -83,9 +82,9 @@ Booking.destroy_all
 puts 'seeding data...'
 
 # Create 10 unique users
+
 10.times do
   User.create(
-    username: Faker::Name.name,
     email: Faker::Internet.email,
     password: 'password',
     password_confirmation: 'password',
@@ -94,29 +93,19 @@ puts 'seeding data...'
   )
 end
 
-# Create 1 guest object for each user
-guests = []
-User.all.each do |user|
-  guests << {
-    user_id: user.id,
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: user.email,
-    phone_number: Faker::PhoneNumber.cell_phone,
-    address: Faker::Address.street_address,
-    city: Faker::Address.city,
-    state: Faker::Address.state,
-    country: Faker::Address.country,
-    age: rand(18..100),
-    nationality: Faker::Nation.nationality,
-    passport_number: Faker::Number.number(digits: 10),
-    date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65),
-    created_at: Time.now,
-    updated_at: Time.now
-  }
-end
-
-Guest.insert_all(guests)
+User.update(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  phone_number: Faker::PhoneNumber.cell_phone,
+  address: Faker::Address.street_address,
+  city: Faker::Address.city,
+  state: Faker::Address.state,
+  country: Faker::Address.country,
+  age: rand(18..100),
+  nationality: Faker::Nation.nationality,
+  passport_number: Faker::Number.number(digits: 10),
+  date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65)
+)
 
 # Create 10 hotels
 hotels = []
@@ -156,10 +145,10 @@ Room.insert_all(rooms)
 bookings = []
 10.times do
   room = Room.all.sample
-  guest = Guest.all.sample
+  user = User.all.sample
   bookings << {
     room_id: room.id,
-    guest_id: guest.id,
+    user_id: user.id,
     start_date: Faker::Date.between(from: '2021-09-23', to: '2021-09-30'),
     end_date: Faker::Date.between(from: '2021-09-30', to: '2021-10-31'),
     created_at: Time.now,
