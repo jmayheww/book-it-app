@@ -18,7 +18,7 @@ const headers = {
 };
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const [errors, setErrors] = useState([]);
   const [showLogin, setShowLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +66,7 @@ export const UserProvider = ({ children }) => {
         navigate("/myaccount");
       });
     } else {
+      setUser(null);
       navigate("/login");
     }
   };

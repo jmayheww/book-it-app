@@ -14,7 +14,8 @@ function App() {
 
   useEffect(() => {
     fetchCurrentUser();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // empty dependency array
 
   return (
     <div className="App">

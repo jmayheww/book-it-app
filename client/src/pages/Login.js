@@ -8,16 +8,6 @@ import UserContext from "../context/userAuth";
 function Login() {
   const { showLogin, buttonClickResponseHandler } = useContext(UserContext);
 
-  // const handleClick = (buttonType) => {
-  //   if (buttonType === "login") {
-  //     setShowLogin(true);
-  //     navigate("/login");
-  //   } else {
-  //     setShowLogin(false);
-  //     navigate("/signup");
-  //   }
-  // };
-
   return (
     <Wrapper>
       <Logo>BookIt</Logo>
