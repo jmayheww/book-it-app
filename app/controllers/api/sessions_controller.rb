@@ -1,13 +1,17 @@
 class Api::SessionsController < ApplicationController
   before_action :authorize, only: [:destroy]
   def create
-    user = User.find_by(email: params[:email])
+    if params[:email].present? && params[:password].present?
+      user = User.find_by(email: params[:email])
 
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-      render json: user, status: :created
+      if user&.authenticate(params[:password])
+        session[:user_id] = user.id
+        render json: user, status: :created
+      else
+        render json: { error: 'Invalid email or password' }, status: :unauthorized
+      end
     else
-      render json: { error: 'Invalid email or password' }, status: :unauthorized
+      render json: { error: 'Email and password are required' }, status: :unprocessable_entity
     end
   end
 

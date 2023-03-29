@@ -1,19 +1,14 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Button, Divider } from "../styles/index";
+import UserContext from "../context/userAuth";
 
-function NavBar({ setUser }) {
-  const navigate = useNavigate();
+function NavBar() {
+  const { logoutUser } = useContext(UserContext);
 
   function handleLogoutClick() {
-    fetch("/api/logout", { method: "DELETE" }).then((res) => {
-      if (res.ok) {
-        console.log("logout successful");
-        setUser(null);
-        navigate("/login");
-      }
-    });
+    logoutUser();
   }
 
   return (

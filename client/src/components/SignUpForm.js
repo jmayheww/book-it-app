@@ -1,54 +1,45 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import UserContext from "../context/userAuth";
 import { Button, Error, Input, FormField, Label } from "../styles/index";
 
-function SignUpForm({ onSignUp }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const nav = useNavigate();
+function SignUpForm() {
+  const initialState = {
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+  };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setErrors([]);
-    setIsLoading(true);
-    fetch("/api/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-      }),
-    }).then((r) => {
-      setIsLoading(false);
-      if (r.ok) {
-        r.json().then((user) => {
-          onSignUp(user);
-          nav("/myaccount");
-        });
-      } else {
-        r.json().then((data) => {
-          data.errors ? setErrors([data.errors]) : setErrors([data.error]);
-        });
-      }
+  const [signupFormData, setSignupFormData] = useState(initialState);
+
+  const { signupUser, errors, isLoading, setIsLoading } =
+    useContext(UserContext);
+
+  function handleUpdateSignupForm(e) {
+    console.log(e.target.value);
+    setSignupFormData({
+      ...signupFormData,
+      [e.target.name]: e.target.value,
     });
   }
 
+  function handleSignupSubmit(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    signupUser(signupFormData);
+    setSignupFormData(initialState);
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSignupSubmit}>
       <FormField>
         <Label htmlFor="email">Email</Label>
         <Input
           type="email"
           id="email"
+          name="email"
           autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={signupFormData.email}
+          onChange={handleUpdateSignupForm}
         />
       </FormField>
       <FormField>
@@ -56,8 +47,9 @@ function SignUpForm({ onSignUp }) {
         <Input
           type="password"
           id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={signupFormData.password}
+          onChange={handleUpdateSignupForm}
           autoComplete="current-password"
         />
       </FormField>
@@ -66,9 +58,9 @@ function SignUpForm({ onSignUp }) {
         <Input
           type="password"
           id="password_confirmation"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          autoComplete="current-password"
+          name="passwordConfirmation"
+          value={signupFormData.passwordConfirmation}
+          onChange={handleUpdateSignupForm}
         />
       </FormField>
       <FormField>

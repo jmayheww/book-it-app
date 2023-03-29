@@ -1,52 +1,42 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import { Button, Error, Input, FormField, Label } from "../styles";
+import UserContext from "../context/userAuth";
 
-function LoginForm({ onLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const nav = useNavigate();
+function LoginForm() {
+  const initialState = {
+    email: "",
+    password: "",
+  };
 
-  function handleSubmit(e) {
+  const [loginFormData, setLoginFormData] = useState(initialState);
+  const { loginUser, errors, isLoading, setIsLoading } =
+    useContext(UserContext);
+
+  function handleLoginSubmit(e) {
     e.preventDefault();
-    setErrors([]);
     setIsLoading(true);
-    fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    }).then((r) => {
-      setIsLoading(false);
-      if (r.ok) {
-        r.json().then((user) => {
-          onLogin(user);
-          nav("/myaccount");
-        });
-      } else {
-        r.json().then((data) => {
-          setErrors((current) => [...current, data.error]);
-        });
-      }
+    loginUser(loginFormData);
+    setLoginFormData(initialState);
+  }
+
+  function updateLoginForm(e) {
+    setLoginFormData({
+      ...loginFormData,
+      [e.target.name]: e.target.value,
     });
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleLoginSubmit}>
       <FormField>
         <Label htmlFor="email">Email</Label>
         <Input
           type="email"
           id="email"
+          name="email"
           autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={loginFormData.email}
+          onChange={updateLoginForm}
         />
       </FormField>
       <FormField>
@@ -54,9 +44,10 @@ function LoginForm({ onLogin }) {
         <Input
           type="password"
           id="password"
+          name="password"
           autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={loginFormData.password}
+          onChange={updateLoginForm}
         />
       </FormField>
       <FormField>

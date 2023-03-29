@@ -1,44 +1,50 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import styled from "styled-components";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
 import { Button, Divider } from "../styles/index";
+import UserContext from "../context/userAuth";
 
-function Login({ onLogin, showLogin, setShowLogin }) {
-  const nav = useNavigate();
+function Login() {
+  const { showLogin, buttonClickResponseHandler } = useContext(UserContext);
 
-  const handleClick = (buttonType) => {
-    if (buttonType === "login") {
-      setShowLogin(true);
-      nav("/login");
-    } else {
-      setShowLogin(false);
-      nav("/signup");
-    }
-  };
+  // const handleClick = (buttonType) => {
+  //   if (buttonType === "login") {
+  //     setShowLogin(true);
+  //     navigate("/login");
+  //   } else {
+  //     setShowLogin(false);
+  //     navigate("/signup");
+  //   }
+  // };
 
   return (
     <Wrapper>
       <Logo>BookIt</Logo>
       {showLogin ? (
         <>
-          <LoginForm onLogin={onLogin} />
+          <LoginForm />
           <Divider />
           <p>
             Don't have an account? &nbsp;
-            <Button color="secondary" onClick={() => handleClick("signup")}>
+            <Button
+              color="secondary"
+              onClick={() => buttonClickResponseHandler("signup")}
+            >
               Sign Up
             </Button>
           </p>
         </>
       ) : (
         <>
-          <SignUpForm onSignUp={onLogin} />
+          <SignUpForm />
           <Divider />
           <p>
             Already have an account? &nbsp;
-            <Button color="secondary" onClick={() => handleClick("login")}>
+            <Button
+              color="secondary"
+              onClick={() => buttonClickResponseHandler("login")}
+            >
               Log In
             </Button>
           </p>
