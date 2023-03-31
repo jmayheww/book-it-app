@@ -52,7 +52,7 @@ function UserProfile() {
     <>
       <h1>Profile</h1>
       <Button onClick={() => handleEditClick()}>Edit Profile</Button>
-      {isEditOpen && <EditProfileModal />}
+      {isEditOpen && <EditProfileModal setIsEditOpen={setIsEditOpen} />}
     </>
 
     // </Wrapper>
