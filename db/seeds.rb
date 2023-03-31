@@ -2,83 +2,12 @@
 # # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 # #
 
-# User.destroy_all
-# Guest.destroy_all
-# Hotel.destroy_all
-# Room.destroy_all
-# Booking.destroy_all
-
-# puts 'seeding data...'
-
-# # Create 10 unique users
-# 10.times do
-#   user = User.create(
-#     username: Faker::Name.name,
-#     email: Faker::Internet.email,
-#     password: 'password',
-#     password_confirmation: 'password'
-#   )
-
-#   # Create 1 guest object for each user
-#   Guest.create(
-#     user: user,
-#     first_name: Faker::Name.first_name,
-#     last_name: Faker::Name.last_name,
-#     email: user.email,
-#     phone_number: Faker::PhoneNumber.cell_phone,
-#     address: Faker::Address.street_address,
-#     city: Faker::Address.city,
-#     state: Faker::Address.state,
-#     country: Faker::Address.country,
-#     age: rand(18..100),
-#     nationality: Faker::Nation.nationality,
-#     passport_number: Faker::Number.number(digits: 10),
-#     date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65)
-#   )
-
-#   # Create 10 hotels
-#   10.times do
-#     hotel = Hotel.create(
-#       name: Faker::Company.name,
-#       address: Faker::Address.full_address,
-#       description: Faker::Lorem.paragraph,
-#       rating: rand(1..5),
-#       image_url: Faker::LoremFlickr.image(size: '50x60', search_terms: ['hotel'])
-#     )
-
-#     # Create 10 rooms for each hotel
-#     10.times do
-#       hotel.rooms.create(
-#         room_type: Faker::Lorem.word,
-#         description: Faker::Lorem.paragraph,
-#         capacity: rand(1..10),
-#         price_per_night: rand(100..1000),
-#         is_available: true,
-#         image_url: Faker::LoremFlickr.image(size: '50x60', search_terms: ['hotel'])
-#       )
-#     end
-#   end
-# end
-
-# # Create 10 bookings that connect guests and rooms
-# 10.times do
-#   room = Room.all.sample
-#   guest = Guest.all.sample
-#   Booking.create(
-#     room: room,
-#     guest: guest,
-#     start_date: Faker::Date.between(from: '2021-09-23', to: '2021-09-30'),
-#     end_date: Faker::Date.between(from: '2021-09-30', to: '2021-10-31')
-#   )
-# end
-
-# puts 'done seeding...'
-
 User.destroy_all
 Hotel.destroy_all
 Room.destroy_all
 Booking.destroy_all
 
+# puts 'done seeding...'
 puts 'seeding data...'
 
 # Create 10 unique users
@@ -91,21 +20,21 @@ puts 'seeding data...'
     created_at: Time.now,
     updated_at: Time.now
   )
-end
 
-User.update(
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  phone_number: Faker::PhoneNumber.cell_phone,
-  address: Faker::Address.street_address,
-  city: Faker::Address.city,
-  state: Faker::Address.state,
-  country: Faker::Address.country,
-  age: rand(18..100),
-  nationality: Faker::Nation.nationality,
-  passport_number: Faker::Number.number(digits: 10),
-  date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65)
-)
+  User.update(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    phone_number: Faker::PhoneNumber.cell_phone,
+    address: Faker::Address.street_address,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: Faker::Address.country,
+    age: rand(18..100),
+    nationality: Faker::Nation.nationality,
+    passport_number: Faker::Number.number(digits: 10),
+    date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65)
+  )
+end
 
 # Create 10 hotels
 hotels = []
