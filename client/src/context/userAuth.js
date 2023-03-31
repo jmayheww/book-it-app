@@ -53,6 +53,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    setErrors([]);
     fetch("/api/logout", { method: "DELETE" }).then(() => {
       setUser(null);
       navigate("/login");
