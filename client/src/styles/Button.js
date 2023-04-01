@@ -32,8 +32,8 @@ const ButtonBase = styled.button`
 `;
 
 const FillButton = styled(ButtonBase)`
-  background-color: var(--main);
-  color: var(--accent);
+  background-color: #49beb7;
+  color: white;
 
   &:hover {
     opacity: 0.9;
@@ -42,8 +42,8 @@ const FillButton = styled(ButtonBase)`
 
 const OutlineButton = styled(ButtonBase)`
   background-color: white;
-  color: var(--main);
-  border: 2px solid var(--main);
+  color: #f67280;
+  border: 2px solid #f67280;
 
   &:hover {
     background: hsl(235deg 85% 97%);

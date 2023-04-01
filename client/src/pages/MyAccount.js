@@ -1,8 +1,5 @@
-import React, { useContext } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React from "react";
 import UserProfileCard from "../components/UserProfileCard";
-import EditProfileModal from "../components/EditProfileModal";
-import UserContext from "../context/userAuth";
 
 function MyAccount() {
   // const location = useLocation();

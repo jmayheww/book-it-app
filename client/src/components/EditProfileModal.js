@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import styled, { css } from "styled-components";
-import { Button, Error, Input, FormField, Label } from "../styles";
 import { RiCloseLine } from "react-icons/ri";
 import UserContext from "../context/userAuth";
 
@@ -84,6 +83,7 @@ export const Modal = styled.div`
 export const TripModal = styled(Modal)`
   width: 600px;
   height: 500px;
+  background: #f0e6ef;
 `;
 
 export const ModalHeader = styled.div`
@@ -92,16 +92,18 @@ export const ModalHeader = styled.div`
   overflow: hidden;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+  background: #49beb7;
 `;
 
 export const Heading = styled.h3`
   margin: 0;
   padding: 10px;
-  color: #2c3e50;
+  color: white;
   font-weight: 500;
   font-size: 18px;
   text-align: center;
 `;
+
 export const ModalContent = styled.div`
   padding: 10px;
   font-size: 14px;
@@ -111,7 +113,6 @@ export const ModalContent = styled.div`
   align-items: flex-start;
   flex-direction: column;
 `;
-
 export const FormContent = styled(ModalContent)`
   input {
     width: 100%;
@@ -125,13 +126,6 @@ export const FormContent = styled(ModalContent)`
 
   ::placeholder {
     font-size: large;
-  }
-`;
-
-export const Field = styled.div`
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
   }
 `;
 
@@ -166,19 +160,19 @@ export const SubmitBtn = styled.button`
   ${buttonStyles}
   margin-top: 10px;
   color: #fff;
-  background: deeppink;
+  background: #e63946;
 
   &:hover {
-    box-shadow: 0 10px 20px -10px rgba(255, 20, 147, 0.6);
-    background: #ff1493;
+    box-shadow: 0 10px 20px -10px rgba(230, 57, 70, 0.6);
+    background: #d62828;
   }
 `;
 
 export const CancelBtn = styled.button`
   ${buttonStyles}
-  background-color: white;
-  color: indigo;
-  border: 2px solid indigo;
+  background-color: #f1faee;
+  color: #457b9d;
+  border: 2px solid #457b9d;
 
   &:hover {
     background: hsl(235deg 85% 97%);
@@ -187,21 +181,7 @@ export const CancelBtn = styled.button`
   &:hover {
     box-shadow: none;
     transform: none;
-    background: whitesmoke;
-  }
-`;
-
-export const PrimaryBtn = styled.button`
-  ${buttonStyles}
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-  width: 10rem;
-  color: white;
-  background: #308695;
-
-  &:hover {
-    box-shadow: 0 10px 20px -10px rgba(24, 90, 219, 0.6);
+    background: #f8ede3;
   }
 `;
 
@@ -210,10 +190,10 @@ export const CloseBtn = styled.button`
   font-weight: 500;
   padding: 4px 8px;
   border-radius: 8px;
-  border: 2px solid indigo;
+  border: 2px solid #e63946;
   font-size: 18px;
-  color: deeppink;
-  background: indigo;
+  color: #e63946;
+  background: #f1faee;
   transition: all 0.25s ease;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
   position: absolute;
