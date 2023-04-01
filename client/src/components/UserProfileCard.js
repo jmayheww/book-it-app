@@ -1,28 +1,30 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { Button, Divider } from "../styles";
+import { Button } from "../styles";
 import UserContext from "../context/userAuth";
 import EditProfileModal from "./EditProfileModal";
 
-function UserProfile() {
+function UserProfileCard() {
   const { user } = useContext(UserContext);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+
+  if (!user) return null;
+
   const {
     avatar_url,
     first_name,
     last_name,
     email,
     phone_number,
+    passport_number,
     address,
     city,
     state,
     country,
-    passport_number,
-    date_of_birth,
     age,
+    date_of_birth,
     nationality,
   } = user;
-  console.log("user: ", user);
-  const [isEditOpen, setIsEditOpen] = useState(false);
 
   function handleEditClick() {
     setIsEditOpen(true);
@@ -38,9 +40,9 @@ function UserProfile() {
         />
         <Name>
           {first_name && last_name ? (
-            `${user.first_name} ${user.last_name}`
+            `${first_name} ${last_name}`
           ) : (
-            <p style={{ color: "#f67280" }}>Name:</p>
+            <p style={{ color: "white" }}>Name:</p>
           )}
         </Name>
         <InfoWrapper>
@@ -153,6 +155,7 @@ const InfoRow = styled.div`
 
 const Value = styled.span`
   font-weight: normal;
+  color: #f8f9fa;
 `;
 
 const PageWrapper = styled.div`
@@ -168,7 +171,7 @@ const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffffff; // Card background color
+  background-color: #49beb7; // Card background color
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 24px;
@@ -179,19 +182,26 @@ const ProfileWrapper = styled.div`
 const Name = styled.h2`
   margin-bottom: 24px;
   font-size: 1.8rem;
-  color: #333333; // Text color
+  color: #fefefe; // Text color
 `;
 
 const Label = styled.span`
   font-weight: bold;
-  color: #f67280; // Primary color
+  color: #f8f9fa;
 `;
 
 const EditButton = styled(Button)`
   margin-top: 24px;
-  background-color: #49beb7; // Secondary color
-  border-color: #49beb7;
-  color: white; // Text color
+  background-color: white;
+  border-color: #f67280;
+  border: 2px solid #f67280;
+  color: #f67280; // Text color
+
+  &:hover {
+    box-shadow: 0 10px 20px -10px rgba(230, 57, 70, 0.6);
+    color: white;
+    background: #f67280;
+  }
 `;
 
-export default UserProfile;
+export default UserProfileCard;

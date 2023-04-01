@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-const COLORS = {
-  primary: {
-    "--main": "indigo",
-    "--accent": "white",
-  },
-  secondary: {
-    "--main": "lavenderblush",
-    "--accent": "indigo",
-  },
-};
+// const COLORS = {
+//   primary: {
+//     "--main": "indigo",
+//     "--accent": "white",
+//   },
+//   secondary: {
+//     "--main": "lavenderblush",
+//     "--accent": "indigo",
+//   },
+// };
 
 function Button({ variant = "fill", color = "primary", ...props }) {
   let Component;
@@ -19,7 +19,7 @@ function Button({ variant = "fill", color = "primary", ...props }) {
     Component = OutlineButton;
   }
 
-  return <Component style={COLORS[color]} {...props} />;
+  return <Component {...props} />;
 }
 
 const ButtonBase = styled.button`
@@ -34,7 +34,6 @@ const ButtonBase = styled.button`
 const FillButton = styled(ButtonBase)`
   background-color: #49beb7;
   color: white;
-
   &:hover {
     opacity: 0.9;
   }

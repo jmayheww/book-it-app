@@ -4,5 +4,6 @@ import FormField from "./FormField";
 import Input from "./Input";
 import Label from "./Label";
 import Error from "./Error";
+import ButtonContainer from "./ButtonContainer";
 
-export { Button, Error, FormField, Input, Label, Divider };
+export { Button, ButtonContainer, Error, FormField, Input, Label, Divider };

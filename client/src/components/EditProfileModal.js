@@ -80,10 +80,10 @@ export const Modal = styled.div`
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
 `;
 
-export const TripModal = styled(Modal)`
+const TripModal = styled(Modal)`
   width: 600px;
   height: 500px;
-  background: #f0e6ef;
+  background: #49beb7; // Card background color
 `;
 
 export const ModalHeader = styled.div`
@@ -92,7 +92,7 @@ export const ModalHeader = styled.div`
   overflow: hidden;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  background: #49beb7;
+  background: #f67280; // Primary color
 `;
 
 export const Heading = styled.h3`
@@ -103,16 +103,16 @@ export const Heading = styled.h3`
   font-size: 18px;
   text-align: center;
 `;
-
 export const ModalContent = styled.div`
   padding: 10px;
   font-size: 14px;
-  color: #2c3e50;
+  color: #f8f9fa; // Lighter color for better readability
   text-align: center;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 `;
+
 export const FormContent = styled(ModalContent)`
   input {
     width: 100%;
@@ -159,29 +159,31 @@ const buttonStyles = css`
 export const SubmitBtn = styled.button`
   ${buttonStyles}
   margin-top: 10px;
-  color: #fff;
-  background: #e63946;
+  color: #f67280;
+  background: white;
+  border: 2px solid #f67280;
 
   &:hover {
     box-shadow: 0 10px 20px -10px rgba(230, 57, 70, 0.6);
-    background: #d62828;
+    color: white;
+    background: #f67280;
   }
 `;
 
 export const CancelBtn = styled.button`
   ${buttonStyles}
-  background-color: #f1faee;
-  color: #457b9d;
-  border: 2px solid #457b9d;
+  background-color: white; // Secondary color
+  color: #f67280; // Text color
+  border: 2px solid #f67280;
 
   &:hover {
     background: hsl(235deg 85% 97%);
   }
 
   &:hover {
-    box-shadow: none;
-    transform: none;
-    background: #f8ede3;
+    box-shadow: 0 10px 20px -10px rgba(230, 57, 70, 0.6);
+    color: white;
+    background: #f67280;
   }
 `;
 
