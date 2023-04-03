@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useContext } from "react";
+import React, { Suspense, useEffect, useState, useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import UserContext from "../context/userAuth";
@@ -11,9 +11,20 @@ const AsyncLogout = React.lazy(() => import("../pages/Logout"));
 
 function App() {
   const { user, fetchCurrentUser } = useContext(UserContext);
+  const [hotels, sethotels] = useState([]);
+
+  function getHotels() {
+    fetch("/api/hotels")
+      .then((resp) => resp.json())
+      .then((data) => {
+        sethotels(data);
+      });
+  }
 
   useEffect(() => {
     fetchCurrentUser();
+    getHotels();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // empty dependency array
 
@@ -26,7 +37,11 @@ function App() {
             <Route exact path="/" element={<AsyncHome />} />
             <Route exact path="/home" element={<AsyncHome />} />
             <Route exact path="/myaccount" element={<AsyncMyAccount />} />
-            <Route exact path="/hotels" element={<AsyncHotelsPage />} />
+            <Route
+              exact
+              path="/hotels"
+              element={<AsyncHotelsPage hotels={hotels} />}
+            />
             <Route exact path="/logout" element={<AsyncLogout />} />
 
             {!user && (
