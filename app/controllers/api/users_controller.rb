@@ -11,6 +11,7 @@ class Api::UsersController < ApplicationController
 
   def show
     current_user = User.find_by(id: session[:user_id])
+
     if current_user
       render json: current_user, status: :created
     else
@@ -18,11 +19,15 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def update
+  def update_profile
     current_user = User.find_by(id: session[:user_id])
+    Rails.logger.debug "Current user: #{current_user.inspect}"
+    Rails.logger.debug "Profile params: #{profile_params.inspect}"
+
     if current_user
       current_user.update!(profile_params)
-      render json: current_user, status: :created
+      Rails.logger.debug "Updated user: #{current_user.inspect}"
+      render json: current_user, status: :ok
     else
       render json: { error: 'Not authorized' }, status: :unauthorized
     end
@@ -35,8 +40,8 @@ class Api::UsersController < ApplicationController
   end
 
   def profile_params
-    params.permit(:first_name, :last_name, :phone_number, :address, :city, :state, :country, :age, :nationality,
-                  :passport_number, :date_of_birth)
+    params.permit(:first_name, :last_name, :phone_number, :address, :city, :state, :country,
+                  :passport_number, :date_of_birth, :avatar_url, :email)
   end
 
   def render_record_not_found_response(exception)

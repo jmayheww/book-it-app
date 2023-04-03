@@ -42,7 +42,7 @@ const Wrapper = styled.header`
 const Logo = styled.h1`
   font-family: "Permanent Marker", cursive;
   font-size: 3rem;
-  color: #f67280; // Primary color
+  color: #f67280;
   margin: 0;
   line-height: 1;
 
@@ -57,6 +57,12 @@ const Nav = styled.nav`
   gap: 4px;
   position: absolute;
   right: 8px;
+
+  @media screen and (max-width: 768px) {
+    position: relative;
+    margin-left: auto;
+    gap: 16px;
+  }
 `;
 
 export default NavBar;

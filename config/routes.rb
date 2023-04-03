@@ -8,11 +8,12 @@ Rails.application.routes.draw do
 
     resources :bookings
     resources :rooms
-  
+
     post '/signup', to: 'users#create'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
     get '/me', to: 'users#show'
+    patch '/update_profile', to: 'users#update_profile'
   end
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

@@ -4,17 +4,31 @@ import { RiCloseLine } from "react-icons/ri";
 import UserContext from "../context/userAuth";
 
 function EditProfileModal({ setIsEditOpen }) {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [updatedUser, setUpdatedUser] = useState({ ...user });
 
   function handleChange(e) {
     setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
   }
 
+  function updateUser() {
+    return fetch("/api/update_profile", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUser),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
+    updateUser();
     setIsEditOpen(false);
-    console.log(updatedUser);
   }
 
   function handleCloseClick() {
@@ -129,12 +143,22 @@ function EditProfileModal({ setIsEditOpen }) {
                 />
               </FormGroup>
               <FormGroup>
-                <label>Age:</label>
+                <label>Date of Birth:</label>
                 <input
-                  type="number"
-                  name="age"
-                  placeholder="Age"
-                  value={updatedUser?.age || ""}
+                  type="date"
+                  name="date_of_birth"
+                  placeholder="Date of Birth"
+                  value={updatedUser?.date_of_birth || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>Avatar:</label>
+                <input
+                  type="text"
+                  name="avatar_url"
+                  placeholder="Avatar"
+                  value={updatedUser?.avatar_url || ""}
                   onChange={handleChange}
                 />
               </FormGroup>
