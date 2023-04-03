@@ -25,18 +25,120 @@ function EditProfileModal({ setIsEditOpen }) {
     <>
       <DarkBG />
       <Centered>
-        <TripModal>
-          <ModalHeader>
-            <Heading>Edit Trip</Heading>
-          </ModalHeader>
+        <ModalHeader>
+          <Heading>Edit Profile</Heading>
           <CloseBtn onClick={() => handleCloseClick()}>
             <RiCloseLine />
           </CloseBtn>
+        </ModalHeader>
+        <ProfileModal>
           <ModalContent>Please change the following details:</ModalContent>
+
           <FormContent>
             <form onSubmit={handleSubmit}>
-              {/* Add input fields here */}
-              {/* ... */}
+              <FormGroup>
+                <label>Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={updatedUser?.email || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>First Name:</label>
+                <input
+                  type="text"
+                  name="first_name"
+                  placeholder="First Name"
+                  value={updatedUser?.first_name || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>Last Name:</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  placeholder="Last Name"
+                  value={updatedUser?.last_name || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>Phone Number:</label>
+                <input
+                  type="tel"
+                  name="phone_number"
+                  placeholder="Phone Number"
+                  value={updatedUser?.phone_number || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <label>Address:</label>
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Address"
+                  value={updatedUser?.address || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>City:</label>
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="City"
+                  value={updatedUser?.city || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>State:</label>
+                <input
+                  type="text"
+                  name="state"
+                  placeholder="State"
+                  value={updatedUser?.state || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>Country:</label>
+                <input
+                  type="text"
+                  name="country"
+                  placeholder="Country"
+                  value={updatedUser?.country || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <label>Passport Number:</label>
+                <input
+                  type="text"
+                  name="passport_number"
+                  placeholder="Passport Number"
+                  value={updatedUser?.passport_number || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <label>Age:</label>
+                <input
+                  type="number"
+                  name="age"
+                  placeholder="Age"
+                  value={updatedUser?.age || ""}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+
               <ModalActions>
                 <ActionsContainer>
                   <SubmitBtn type="submit">Submit</SubmitBtn>
@@ -45,7 +147,7 @@ function EditProfileModal({ setIsEditOpen }) {
               </ModalActions>
             </form>
           </FormContent>
-        </TripModal>
+        </ProfileModal>
       </Centered>
     </>
   );
@@ -63,11 +165,15 @@ export const DarkBG = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 0;
+  top: 0;
+  left: 0;
   ${fixedCentered}
 `;
 
 export const Centered = styled.div`
   ${fixedCentered}
+  z-index: 10;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
 `;
 
 export const Modal = styled.div`
@@ -80,40 +186,70 @@ export const Modal = styled.div`
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
 `;
 
-const TripModal = styled(Modal)`
+const ProfileModal = styled(Modal)`
   width: 600px;
   height: 500px;
-  background: #49beb7; // Card background color
+  background: #49beb7;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f67280;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #f67280;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 16px;
+    background-color: white;
+  }
 `;
 
 export const ModalHeader = styled.div`
   height: 50px;
-  background: white;
-  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  background: #f67280;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  background: #f67280; // Primary color
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
 `;
 
 export const Heading = styled.h3`
   margin: 0;
-  padding: 10px;
   color: white;
   font-weight: 500;
   font-size: 18px;
-  text-align: center;
 `;
+
 export const ModalContent = styled.div`
   padding: 10px;
   font-size: 14px;
-  color: #f8f9fa; // Lighter color for better readability
+  color: #f8f9fa;
   text-align: center;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  height: auto;
 `;
 
-export const FormContent = styled(ModalContent)`
+export const FormContent = styled.div`
+  padding: 10px;
+  font-size: 14px;
+  color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+
   input {
     width: 100%;
     padding: 12px 20px;
@@ -128,18 +264,28 @@ export const FormContent = styled(ModalContent)`
     font-size: large;
   }
 `;
+export const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+`;
 
 export const ModalActions = styled.div`
-  position: absolute;
-  bottom: 2px;
-  margin-bottom: 10px;
+  margin-top: auto;
+  padding: 10px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #49beb7;
 `;
 
 export const ActionsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 50%;
+  padding: 0 10px;
 `;
 
 const buttonStyles = css`
@@ -158,7 +304,6 @@ const buttonStyles = css`
 
 export const SubmitBtn = styled.button`
   ${buttonStyles}
-  margin-top: 10px;
   color: #f67280;
   background: white;
   border: 2px solid #f67280;
@@ -192,22 +337,16 @@ export const CloseBtn = styled.button`
   font-weight: 500;
   padding: 4px 8px;
   border-radius: 8px;
-  border: 2px solid #e63946;
+  border: 2px solid #f67280;
   font-size: 18px;
-  color: #e63946;
+  color: #f67280;
   background: #f1faee;
   transition: all 0.25s ease;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
-  position: absolute;
-  right: 0;
-  top: 0;
-  align-self: flex-end;
-  margin-top: -7px;
-  margin-right: -7px;
 
   &:hover {
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-    transform: translate(-4px, 4px);
+    transform: translateY(-5px);
   }
 `;
 
