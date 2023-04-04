@@ -6,7 +6,8 @@ import UserContext from "../context/userAuth";
 const AsyncHome = React.lazy(() => import("../pages/Home"));
 const AsyncMyAccount = React.lazy(() => import("../pages/MyAccount"));
 const AsyncLogin = React.lazy(() => import("../pages/Login"));
-const AsyncHotelsPage = React.lazy(() => import("../pages/HotelsPage"));
+const AsyncHotelsList = React.lazy(() => import("../pages/HotelsList"));
+const AsyncViewHotelPage = React.lazy(() => import("../pages/ViewHotelPage"));
 const AsyncLogout = React.lazy(() => import("../pages/Logout"));
 
 function App() {
@@ -40,8 +41,13 @@ function App() {
             <Route
               exact
               path="/hotels"
-              element={<AsyncHotelsPage hotels={hotels} />}
+              element={<AsyncHotelsList hotels={hotels} />}
             />
+            <Route
+              path="/hotels/:hotelId"
+              element={<AsyncViewHotelPage hotels={hotels} />}
+            />
+
             <Route exact path="/logout" element={<AsyncLogout />} />
 
             {!user && (

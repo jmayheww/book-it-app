@@ -64,7 +64,6 @@ export const UserProvider = ({ children }) => {
     if (r.ok) {
       r.json().then((user) => {
         setUser(user);
-        navigate("/myaccount");
       });
     } else {
       setUser(null);

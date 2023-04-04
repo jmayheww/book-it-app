@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../styles";
+import { useNavigate } from "react-router-dom";
 
 function HotelCard({ hotel }) {
-  const [isShowing, setIsShowing] = useState(false);
+  const nav = useNavigate();
 
-  const { name, address, description, image_url, phone, website, rating } =
+  const { id, name, address, description, image_url, phone, website, rating } =
     hotel;
 
-  function handleBookNowClick() {
-    console.log("Book Now Clicked");
-  }
-  function handleDetailsClick() {
-    setIsShowing(!isShowing);
+  function handleDetailsClick(id) {
+    nav(`/hotels/${id}`);
   }
 
   return (
@@ -25,32 +23,11 @@ function HotelCard({ hotel }) {
         <HotelLocation>{address}</HotelLocation>
 
         <ButtonWrapper>
-          <DetailsButton onClick={handleDetailsClick}>
-            {isShowing ? "Hide Details" : "Show Details"}
+          <DetailsButton onClick={() => handleDetailsClick(id)}>
+            View Hotel
           </DetailsButton>
-          <BookNowButton onClick={handleBookNowClick}>Show Rooms</BookNowButton>
         </ButtonWrapper>
       </CardContent>
-      {isShowing && (
-        <DetailsWrapper>
-          <Details>
-            <DetailsLabel>Description: </DetailsLabel>
-            {description}
-          </Details>
-          <Details>
-            <DetailsLabel>Phone: </DetailsLabel>
-            {phone}
-          </Details>
-          <Details>
-            <DetailsLabel>Website: </DetailsLabel>
-            <a href={website}>{website}</a>
-          </Details>
-          <Details>
-            <DetailsLabel>Rating: </DetailsLabel>
-            {rating}
-          </Details>
-        </DetailsWrapper>
-      )}
     </Card>
   );
 }
