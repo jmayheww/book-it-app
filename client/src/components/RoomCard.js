@@ -13,24 +13,33 @@ function RoomCard({ room }) {
   } = room;
 
   return (
-    <RoomCardWrapper>
-      <ImageWrapper>
-        <RoomImage src={image_url} alt={`${room_title}`} />
-      </ImageWrapper>
-      <RoomContent>
-        <RoomTitle>{room_title}</RoomTitle>
-        <RoomDescription>{description}</RoomDescription>
-        <RoomPrice>${price_per_night} per night</RoomPrice>
-        <RoomDetails>
-          <MaxGuests>Max guests: {max_guests}</MaxGuests>
-          <Availability>
-            {is_available ? "Available" : "Not Available"}
-          </Availability>
-        </RoomDetails>
-      </RoomContent>
-    </RoomCardWrapper>
+    <CardContainer>
+      <RoomCardWrapper>
+        <ImageWrapper>
+          <RoomImage src={image_url} alt={`${room_title}`} />
+        </ImageWrapper>
+        <RoomContent>
+          <RoomTitle>{room_title}</RoomTitle>
+          <RoomDescription>{description}</RoomDescription>
+          <RoomPrice>${price_per_night} per night</RoomPrice>
+          <RoomDetails>
+            <MaxGuests>Max guests: {max_guests}</MaxGuests>
+            <Availability>
+              {is_available ? "Available" : "Not Available"}
+            </Availability>
+          </RoomDetails>
+        </RoomContent>
+      </RoomCardWrapper>
+    </CardContainer>
   );
 }
+
+const CardContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 
 const RoomCardWrapper = styled.div`
   display: flex;

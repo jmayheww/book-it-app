@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 import { Button } from "../styles";
 import RoomCard from "../components/RoomCard";
 
@@ -17,26 +18,38 @@ function ViewHotelPage({ hotels }) {
   function handleRoomsClick() {
     setShowRooms(!showRooms);
   }
-  return viewHotel ? (
-    <>
-      <div className="hotel-info">
-        <h1>{viewHotel.name}</h1>
-        <Button onClick={() => handleRoomsClick()}>
-          {!showRooms ? "Show Rooms" : "Hide Rooms"}
-        </Button>
-      </div>
-      {showRooms ? (
-        <div className="rooms-list">
-          {hotelRooms.map((hotel) => {
-            return <RoomCard key={hotel.id} room={hotel} />;
-          })}
-        </div>
+  return (
+    <MainContainer>
+      {viewHotel ? (
+        <>
+          <div className="hotel-info">
+            <h1>{viewHotel.name}</h1>
+            <Button onClick={() => handleRoomsClick()}>
+              {!showRooms ? "Show Rooms" : "Hide Rooms"}
+            </Button>
+          </div>
+          {showRooms ? (
+            <div className="rooms-list">
+              {hotelRooms.map((hotel) => {
+                return <RoomCard key={hotel.id} room={hotel} />;
+              })}
+            </div>
+          ) : (
+            ""
+          )}
+        </>
       ) : (
-        ""
+        <p>Loading...</p>
       )}
-    </>
-  ) : (
-    <p>Loading...</p>
+    </MainContainer>
   );
 }
 export default ViewHotelPage;
+
+const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+`;
