@@ -70,24 +70,3 @@ const RoomsList = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 `;
-
-// const BackButton = styled(Button)`
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-around;
-//   background-color: #f8f8f8;
-//   border: 1px solid #e0e0e0;
-//   color: #333333;
-//   font-weight: bold;
-//   font-size: 16px;
-//   width: 180px;
-//   position: absolute;
-//   top: 65px;
-//   left: 20px;
-//   padding: 10px;
-//   z-index: 10;
-
-//   &:hover {
-//     background-color: #f0f0f0;
-//   }
-// `;

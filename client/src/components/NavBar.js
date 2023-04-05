@@ -28,7 +28,7 @@ function NavBar({ showBackButton }) {
         )}
       </BackButtonWrapper>
       <Logo>
-        <Link to="/"> BookIt </Link>
+        <Link to="/">BookIt</Link>
       </Logo>
       <Nav>
         <Button as={Link} to="/myaccount">
@@ -70,7 +70,7 @@ const BackButtonWrapper = styled.div`
 const Logo = styled.h1`
   font-family: "Permanent Marker", cursive;
   font-size: 3rem;
-  color: #f67280;
+  color: #ff69b4;
   margin: 0;
   line-height: 1;
   position: absolute;
