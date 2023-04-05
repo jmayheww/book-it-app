@@ -21,16 +21,20 @@ class Api::UsersController < ApplicationController
 
   def update_profile
     current_user = User.find_by(id: session[:user_id])
-    Rails.logger.debug "Current user: #{current_user.inspect}"
-    Rails.logger.debug "Profile params: #{profile_params.inspect}"
 
     if current_user
       current_user.update!(profile_params)
-      Rails.logger.debug "Updated user: #{current_user.inspect}"
+
       render json: current_user, status: :ok
     else
       render json: { error: 'Not authorized' }, status: :unauthorized
     end
+  end
+
+  def destroy
+    user = User.find_by(id: params[:id])
+    user.destroy
+    render json: { message: 'User deleted' }, status: :ok
   end
 
   private

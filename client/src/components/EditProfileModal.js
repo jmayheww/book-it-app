@@ -40,7 +40,6 @@ function EditProfileModal({ setIsEditOpen }) {
       <DarkBG />
       <Centered>
         <ModalHeader>
-          <Heading>Edit Profile</Heading>
           <CloseBtn onClick={() => handleCloseClick()}>
             <RiCloseLine />
           </CloseBtn>
@@ -239,7 +238,7 @@ const ProfileModal = styled(Modal)`
 export const ModalHeader = styled.div`
   height: 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0 16px;
   background: #f67280;
@@ -367,6 +366,9 @@ export const CloseBtn = styled.button`
   background: #f1faee;
   transition: all 0.25s ease;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  top: 10px;
+  right: 10px;
 
   &:hover {
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);

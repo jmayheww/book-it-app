@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import UserContext from "../context/userAuth";
+
+function Home() {
+  const { user } = useContext(UserContext);
+  const firstName = user?.first_name;
+
+  return (
+    <MainSection>
+      <Heading>Welcome{firstName && `, ${firstName}`}</Heading>
+      <SubHeading>Discover the Best Hotels</SubHeading>
+      <Paragraph>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at
+        hendrerit urna, sed finibus ipsum. Sed euismod leo ut libero pretium
+        pharetra. Aliquam ut maximus ex.
+      </Paragraph>
+      <ButtonWrapper>
+        <Button as={Link} to="/hotels">
+          View All Hotels
+        </Button>
+      </ButtonWrapper>
+    </MainSection>
+  );
+}
 
 const MainSection = styled.section`
   background-color: #ffffff;
@@ -53,24 +76,5 @@ const Button = styled.button`
     outline: none;
   }
 `;
-
-const Home = ({ user }) => {
-  return (
-    <MainSection>
-      <Heading>Welcome{user && `, ${user.firstName}`}</Heading>
-      <SubHeading>Discover the Best Hotels</SubHeading>
-      <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at
-        hendrerit urna, sed finibus ipsum. Sed euismod leo ut libero pretium
-        pharetra. Aliquam ut maximus ex.
-      </Paragraph>
-      <ButtonWrapper>
-        <Button as={Link} to="/hotels">
-          View All Hotels
-        </Button>
-      </ButtonWrapper>
-    </MainSection>
-  );
-};
 
 export default Home;
