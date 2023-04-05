@@ -56,6 +56,7 @@ export const UserProvider = ({ children }) => {
     setErrors([]);
     fetch("/api/logout", { method: "DELETE" }).then(() => {
       setUser(null);
+      setShowLogin(true);
       navigate("/login");
     });
   };
@@ -112,6 +113,7 @@ export const UserProvider = ({ children }) => {
         loginUser,
         logoutUser,
         errors,
+        setErrors,
         showLogin,
         setShowLogin,
         fetchCurrentUser,

@@ -5,7 +5,7 @@ import { RiCloseLine } from "react-icons/ri";
 import UserContext from "../context/userAuth";
 
 function DeleteAccountModal({ setIsDeleteOpen }) {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setShowLogin, setErrors } = useContext(UserContext);
   const navigate = useNavigate();
 
   function deleteUser() {
@@ -18,7 +18,10 @@ function DeleteAccountModal({ setIsDeleteOpen }) {
       .then((resp) => resp.json())
       .then((data) => {
         console.log("data: ", data);
+        setErrors([]);
         setUser(null);
+        setShowLogin(false);
+
         navigate("/signup");
       });
   }

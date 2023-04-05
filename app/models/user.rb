@@ -5,5 +5,6 @@ class User < ApplicationRecord
   has_many :hotels, through: :rooms, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8 }, on: :create
+  validates :password, confirmation: true, presence: true, length: { minimum: 8 }, on: :create
+  validates :password_confirmation, presence: true, on: :create
 end

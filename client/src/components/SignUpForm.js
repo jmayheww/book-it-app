@@ -6,16 +6,16 @@ function SignUpForm() {
   const initialState = {
     email: "",
     password: "",
-    passwordConfirmation: "",
+    password_confirmation: "",
   };
 
   const [signupFormData, setSignupFormData] = useState(initialState);
 
-  const { signupUser, errors, isLoading, setIsLoading } =
+  const { signupUser, errors, setErrors, isLoading, setIsLoading } =
     useContext(UserContext);
 
   function handleUpdateSignupForm(e) {
-    console.log(e.target.value);
+    setErrors([]);
     setSignupFormData({
       ...signupFormData,
       [e.target.name]: e.target.value,
@@ -24,9 +24,9 @@ function SignUpForm() {
 
   function handleSignupSubmit(e) {
     e.preventDefault();
+    setSignupFormData(initialState);
     setIsLoading(true);
     signupUser(signupFormData);
-    setSignupFormData(initialState);
   }
 
   return (
@@ -58,8 +58,8 @@ function SignUpForm() {
         <Input
           type="password"
           id="password_confirmation"
-          name="passwordConfirmation"
-          value={signupFormData.passwordConfirmation}
+          name="password_confirmation"
+          value={signupFormData.password_confirmation}
           onChange={handleUpdateSignupForm}
         />
       </FormField>
