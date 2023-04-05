@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState, useContext } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import UserContext from "../context/userAuth";
 
@@ -13,6 +13,8 @@ const AsyncLogout = React.lazy(() => import("../pages/Logout"));
 function App() {
   const { user, fetchCurrentUser } = useContext(UserContext);
   const [hotels, sethotels] = useState([]);
+  const location = useLocation();
+  const showBackButton = location.pathname.includes("/hotels/");
 
   function getHotels() {
     fetch("/api/hotels")
@@ -31,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      {user && <NavBar />}
+      {user && <NavBar showBackButton={showBackButton} />}
       <main>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
