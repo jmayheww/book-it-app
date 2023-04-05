@@ -19,17 +19,23 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def update_profile
-    current_user = User.find_by(id: session[:user_id])
-
-    if current_user
-      current_user.update!(profile_params)
-
-      render json: current_user, status: :ok
-    else
-      render json: { error: 'Not authorized' }, status: :unauthorized
-    end
+  def update
+    updated_user = User.find_by(id: params[:id])
+    updated_user.update!(profile_params)
+    render json: updated_user, status: :ok
   end
+
+  # def update_profile
+  #   current_user = User.find_by(id: session[:user_id])
+
+  #   if current_user
+  #     current_user.update!(profile_params)
+
+  #     render json: current_user, status: :ok
+  #   else
+  #     render json: { error: 'Not authorized' }, status: :unauthorized
+  #   end
+  # end
 
   def destroy
     user = User.find_by(id: params[:id])

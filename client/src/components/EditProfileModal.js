@@ -12,7 +12,7 @@ function EditProfileModal({ setIsEditOpen }) {
   }
 
   function updateUser() {
-    return fetch("/api/update_profile", {
+    return fetch(`/api/users/${user.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
