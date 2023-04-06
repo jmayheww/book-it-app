@@ -15,7 +15,7 @@ function BookingModal({
   const { user, navigate } = useContext(UserContext);
 
   const [initialValue, setInitialValue] = useState({
-    user_id: user.id,
+    user_id: user?.id,
     room_id: roomId,
     check_in: "",
     check_out: "",
