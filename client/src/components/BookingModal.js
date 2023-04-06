@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { RiCloseLine } from "react-icons/ri";
 import { Error } from "../styles/index";
@@ -12,7 +12,7 @@ function BookingModal({
   errors,
   setErrors,
 }) {
-  const { user } = useContext(UserContext);
+  const { user, navigate } = useContext(UserContext);
 
   const [initialValue, setInitialValue] = useState({
     user_id: user.id,
@@ -43,7 +43,6 @@ function BookingModal({
         });
       } else {
         return resp.json().then((data) => {
-          console.log("errordata: ", data);
           if (data.errors) {
             setErrors(data.errors);
           } else {
@@ -60,13 +59,18 @@ function BookingModal({
     setBooking({ ...booking, [e.target.name]: e.target.value });
   }
 
+  function handleCloseClick() {
+    setShowBookingModal(false);
+    navigate(-1);
+  }
+
   return (
     <>
       {showBookingModal && (
         <DarkBG>
           <Centered>
             <ModalHeader>
-              <CloseBtn onClick={() => setShowBookingModal(false)}>
+              <CloseBtn onClick={() => handleCloseClick()}>
                 <RiCloseLine />
               </CloseBtn>
             </ModalHeader>
@@ -93,34 +97,36 @@ function BookingModal({
                   />
                 </DatePickerWrapper>
               </DatePickers>
-              <FormContent>
-                <form onSubmit={handleSubmit}>
-                  <FormGroup>
-                    <Label>Guests:</Label>
-                    <GuestsPicker
-                      name="number_of_guests"
-                      value={booking.number_of_guests}
-                      onChange={handleNewBooking}
-                    >
-                      {[...Array(10)].map((_, i) => (
-                        <option key={i} value={i + 1}>
-                          {i + 1}
-                        </option>
-                      ))}
-                    </GuestsPicker>
-                  </FormGroup>
-                  <ModalActions>
-                    <SubmitBtn type="submit">Submit Booking</SubmitBtn>
-                  </ModalActions>
-                </form>
+              <div>
+                <FormContent>
+                  <form onSubmit={handleSubmit}>
+                    <FormGroup>
+                      <Label>Guests:</Label>
+                      <GuestsPicker
+                        name="number_of_guests"
+                        value={booking.number_of_guests}
+                        onChange={handleNewBooking}
+                      >
+                        {[...Array(10)].map((_, i) => (
+                          <option key={i} value={i + 1}>
+                            {i + 1}
+                          </option>
+                        ))}
+                      </GuestsPicker>
+                    </FormGroup>
+                    <ModalActions>
+                      <SubmitBtn type="submit">Submit Booking</SubmitBtn>
+                    </ModalActions>
+                  </form>
+                </FormContent>
                 {errors.length > 0 && (
                   <ErrorsWrapper>
-                    {errors.map((error) => {
-                      return <Error key={error}>{error}</Error>;
+                    {errors.map((error, index) => {
+                      return <Error key={index}>{error}</Error>;
                     })}
                   </ErrorsWrapper>
                 )}
-              </FormContent>
+              </div>
             </ModalContent>
           </Centered>
         </DarkBG>

@@ -18,10 +18,10 @@ class Api::BookingsController < ApplicationController
   end
 
   def render_unique_violation_response
-    render json: { error: 'User has already booked this room' }, status: :unprocessable_entity
+    render json: { error: 'Room has already been booked for these dates' }, status: :unprocessable_entity
   end
 
   def render_invalid_record_resp(exception)
-    render json: { error: exception.record.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
   end
 end

@@ -1,12 +1,18 @@
-import React, { useState, useContext } from "react";
-import { useParams, Outlet } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useParams, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // import { Button } from "../styles";
 // import { FaArrowLeft } from "react-icons/fa";
 import RoomCard from "../components/RoomCard";
 
 function ViewHotelPage({ hotels }) {
+  const navigate = useNavigate();
   const { hotelId } = useParams();
+
+  // handle edge case where user refreshes page whilst in modal view
+  useEffect(() => {
+    navigate(`/hotels/${hotelId}`);
+  }, []);
 
   // find hotel by matching hotel id with hotelId from useParams
   const viewHotel = hotels.find((hotel) => hotel.id === parseInt(hotelId));
