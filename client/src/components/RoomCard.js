@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import BookRoomModal from "./BookingModal";
 
 function RoomCard({ room }) {
   const {
@@ -11,6 +12,13 @@ function RoomCard({ room }) {
     is_available,
     max_guests,
   } = room;
+
+  const [showBookingModal, setShowBookingModal] = useState(false);
+
+  function handleBookingModal() {
+    setShowBookingModal(!showBookingModal);
+    console.log("BOOKED!");
+  }
 
   return (
     <CardContainer>
@@ -28,8 +36,18 @@ function RoomCard({ room }) {
               {is_available ? "Available" : "Not Available"}
             </Availability>
           </RoomDetails>
+          <BookingButton onClick={handleBookingModal}>
+            Book this room!
+          </BookingButton>
         </RoomContent>
       </RoomCardWrapper>
+      {showBookingModal && (
+        <BookRoomModal
+          room={room}
+          showBookingModal={showBookingModal}
+          setShowBookingModal={setShowBookingModal}
+        />
+      )}
     </CardContainer>
   );
 }
@@ -101,6 +119,25 @@ const MaxGuests = styled.span`
 const Availability = styled.span`
   font-size: 0.9rem;
   color: ${(props) => (props.available ? "#49beb7" : "#f67280")};
+`;
+
+const BookingButton = styled.button`
+  background-color: #49beb7;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #6dc5bf;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(73, 190, 183, 0.4);
+  }
 `;
 
 export default RoomCard;
