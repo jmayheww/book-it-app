@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useParams, Outlet } from "react-router-dom";
 import styled from "styled-components";
 // import { Button } from "../styles";
 // import { FaArrowLeft } from "react-icons/fa";
@@ -7,7 +7,6 @@ import RoomCard from "../components/RoomCard";
 
 function ViewHotelPage({ hotels }) {
   const { hotelId } = useParams();
-  const history = useNavigate();
 
   // find hotel by matching hotel id with hotelId from useParams
   const viewHotel = hotels.find((hotel) => hotel.id === parseInt(hotelId));
@@ -15,26 +14,21 @@ function ViewHotelPage({ hotels }) {
   // assign rooms to hotelRooms variable, conditional chaining to prevent rooms undefined error
   const hotelRooms = viewHotel?.rooms;
 
-  // function handleBackClick() {
-  //   history(-1);
-  // }
-
   return (
     <MainContainer>
       {viewHotel ? (
         <>
           <div className="hotel-info">
-            {/* <BackButton onClick={handleBackClick}>
-              <FaArrowLeft />
-              Back to Hotels List
-            </BackButton> */}
             <h1>{viewHotel.name}</h1>
           </div>
           <RoomsList>
-            {hotelRooms.map((hotel) => {
-              return <RoomCard key={hotel.id} room={hotel} />;
+            {hotelRooms.map((room) => {
+              return (
+                <RoomCard key={room.id} room={room} hotelId={viewHotel.id} />
+              );
             })}
           </RoomsList>
+          <Outlet />
         </>
       ) : (
         <p>Loading...</p>

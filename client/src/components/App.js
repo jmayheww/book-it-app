@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState, useContext } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import BookRoomModal from "./BookingModal";
 import UserContext from "../context/userAuth";
 
 const AsyncHome = React.lazy(() => import("../pages/Home"));
@@ -20,6 +21,7 @@ function App() {
     fetch("/api/hotels")
       .then((resp) => resp.json())
       .then((data) => {
+        console.log("data: ", data);
         sethotels(data);
       });
   }
@@ -48,8 +50,9 @@ function App() {
             <Route
               path="/hotels/:hotelId"
               element={<AsyncViewHotelPage hotels={hotels} />}
-            />
-
+            >
+              <Route path="rooms/:room_id" element={<BookRoomModal />} />
+            </Route>
             <Route exact path="/logout" element={<AsyncLogout />} />
 
             {!user && (

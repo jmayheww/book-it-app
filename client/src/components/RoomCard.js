@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import BookRoomModal from "./BookingModal";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../context/userAuth";
+import BookingModal from "./BookingModal";
 
-function RoomCard({ room }) {
+function RoomCard({ room, hotelId }) {
+  const [showBookingModal, setShowBookingModal] = useState(false);
   const {
     id,
     room_title,
@@ -10,13 +13,17 @@ function RoomCard({ room }) {
     price_per_night,
     image_url,
     is_available,
-    max_guests,
+    number_of_guests,
   } = room;
 
-  const [showBookingModal, setShowBookingModal] = useState(false);
+  const navigate = useNavigate();
+  const { errors, setErrors } = useContext(UserContext);
 
   function handleBookingModal() {
+    setErrors([]);
     setShowBookingModal(!showBookingModal);
+    navigate(`/hotels/${hotelId}/rooms/${id}`);
+
     console.log("BOOKED!");
   }
 
@@ -31,7 +38,7 @@ function RoomCard({ room }) {
           <RoomDescription>{description}</RoomDescription>
           <RoomPrice>${price_per_night} per night</RoomPrice>
           <RoomDetails>
-            <MaxGuests>Max guests: {max_guests}</MaxGuests>
+            <MaxGuests>Max guests: {number_of_guests}</MaxGuests>
             <Availability>
               {is_available ? "Available" : "Not Available"}
             </Availability>
@@ -42,10 +49,13 @@ function RoomCard({ room }) {
         </RoomContent>
       </RoomCardWrapper>
       {showBookingModal && (
-        <BookRoomModal
-          room={room}
+        <BookingModal
+          roomTitle={room_title}
+          roomId={id}
           showBookingModal={showBookingModal}
           setShowBookingModal={setShowBookingModal}
+          errors={errors}
+          setErrors={setErrors}
         />
       )}
     </CardContainer>

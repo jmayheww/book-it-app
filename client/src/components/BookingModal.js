@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { RiCloseLine } from "react-icons/ri";
+import { Error } from "../styles/index";
+import UserContext from "../context/userAuth";
 
-function BookRoomModal({ room, showBookingModal, setShowBookingModal }) {
-  console.log("room: ", room);
+function BookingModal({
+  roomId,
+  roomTitle,
+  showBookingModal,
+  setShowBookingModal,
+  errors,
+  setErrors,
+}) {
+  const { user } = useContext(UserContext);
+
   const [initialValue, setInitialValue] = useState({
+    user_id: user.id,
+    room_id: roomId,
     check_in: "",
     check_out: "",
     number_of_guests: 1,
@@ -14,8 +26,33 @@ function BookRoomModal({ room, showBookingModal, setShowBookingModal }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setBooking(initialValue);
-    setShowBookingModal(false);
+    setErrors([]);
+    fetch("/api/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    }).then((resp) => {
+      if (resp.ok) {
+        return resp.json().then((data) => {
+          console.log("data: ", data);
+
+          setBooking(initialValue);
+          setShowBookingModal(false);
+        });
+      } else {
+        return resp.json().then((data) => {
+          console.log("errordata: ", data);
+          if (data.errors) {
+            setErrors(data.errors);
+          } else {
+            setErrors([data.error]);
+          }
+        });
+      }
+    });
+
     // TODO: Implement booking logic
   }
 
@@ -35,7 +72,7 @@ function BookRoomModal({ room, showBookingModal, setShowBookingModal }) {
             </ModalHeader>
             <ModalHeaderLine />
             <ModalContent>
-              <ModalTitle>{` ${room.room_title}`}</ModalTitle>
+              <ModalTitle>{` ${roomTitle}`}</ModalTitle>
               <DatePickers>
                 <DatePickerWrapper>
                   <Label>Check-in:</Label>
@@ -76,6 +113,13 @@ function BookRoomModal({ room, showBookingModal, setShowBookingModal }) {
                     <SubmitBtn type="submit">Submit Booking</SubmitBtn>
                   </ModalActions>
                 </form>
+                {errors.length > 0 && (
+                  <ErrorsWrapper>
+                    {errors.map((error) => {
+                      return <Error key={error}>{error}</Error>;
+                    })}
+                  </ErrorsWrapper>
+                )}
               </FormContent>
             </ModalContent>
           </Centered>
@@ -252,4 +296,8 @@ export const SubmitBtn = styled.button`
   }
 `;
 
-export default BookRoomModal;
+const ErrorsWrapper = styled.div`
+  margin-top: 1rem;
+`;
+
+export default BookingModal;

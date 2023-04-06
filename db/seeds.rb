@@ -59,7 +59,7 @@ Hotel.all.each do |hotel|
       hotel_id: hotel.id,
       room_title: Faker::Lorem.word,
       description: Faker::Lorem.paragraph,
-      max_guests: rand(1..10),
+      number_of_guests: rand(1..10),
       price_per_night: rand(100..1000),
       is_available: true,
       image_url: Faker::LoremFlickr.image(size: '50x60', search_terms: ['hotel']),
@@ -80,6 +80,7 @@ bookings = []
     user_id: user.id,
     check_in: Faker::Date.between(from: '2021-09-23', to: '2021-09-30'),
     check_out: Faker::Date.between(from: '2021-09-30', to: '2021-10-31'),
+    number_of_guests: rand(1..10),
     created_at: Time.now,
     updated_at: Time.now
 

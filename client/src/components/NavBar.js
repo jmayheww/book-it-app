@@ -14,7 +14,7 @@ function NavBar({ showBackButton }) {
   }
 
   function handleBackClick() {
-    navigate(-1);
+    navigate("/hotels");
   }
 
   return (
