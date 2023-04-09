@@ -33,6 +33,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // empty dependency array
 
+  console.log(user);
   return (
     <div className="App">
       {user && <NavBar showBackButton={showBackButton} />}

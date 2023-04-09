@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Divider } from "../styles/index";
+import { Button } from "../styles/index";
 import UserContext from "../context/userAuth";
 
 function NavBar({ showBackButton }) {

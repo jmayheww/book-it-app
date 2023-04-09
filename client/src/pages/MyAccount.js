@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import UserProfileCard from "../components/UserProfileCard";
+import MyBookingsList from "../components/MyBookingsList";
 import DeleteAccountModal from "../components/DeleteAccountModal";
 
 function MyAccount() {
@@ -15,6 +16,7 @@ function MyAccount() {
     <>
       <MyAccountContainer>
         <UserProfileCard />
+        <MyBookingsList />
       </MyAccountContainer>
       {/* <Routes>
         <Route path="/edit" element={<EditProfileModal />} />

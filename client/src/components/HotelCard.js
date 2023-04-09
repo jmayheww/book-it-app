@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 function HotelCard({ hotel }) {
   const nav = useNavigate();
 
-  const { id, name, address, description, image_url, phone, website, rating } =
-    hotel;
+  const { id, name, address, description, image_url, website } = hotel;
 
   function handleDetailsClick(id) {
     nav(`/hotels/${id}`);
@@ -19,9 +18,15 @@ function HotelCard({ hotel }) {
         <CardImage src={image_url} alt={`${name}`} />
       </ImageWrapper>
       <CardContent>
-        <HotelName>{name}</HotelName>
-        <HotelLocation>{address}</HotelLocation>
-
+        <HotelInfo>
+          <HotelName>{name}</HotelName>
+          <HotelAddress>{address}</HotelAddress>
+        </HotelInfo>
+        {website && (
+          <WebsiteLink href={website} target="_blank" rel="noopener noreferrer">
+            {website}
+          </WebsiteLink>
+        )}
         <ButtonWrapper>
           <DetailsButton onClick={() => handleDetailsClick(id)}>
             View Hotel
@@ -60,26 +65,37 @@ const CardContent = styled.div`
   padding: 16px;
 `;
 
+const HotelInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
 const HotelName = styled.h3`
   margin: 0;
   font-size: 1.2rem;
   color: #49beb7;
 `;
 
-const HotelLocation = styled.span`
+const HotelAddress = styled.span`
   font-size: 0.9rem;
   color: #6c757d;
 `;
 
-const HotelPrice = styled.span`
-  font-weight: bold;
-  color: #f67280;
+const WebsiteLink = styled.a`
+  font-size: 0.9rem;
+  color: #6c757d;
+
+  &:hover {
+    color: #49beb7;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 8px;
   margin-top: 8px;
+  justify-content: space-between;
 `;
 
 const DetailsButton = styled(Button)`
@@ -89,31 +105,6 @@ const DetailsButton = styled(Button)`
   &:hover {
     background-color: #2a9d8f;
   }
-`;
-
-const BookNowButton = styled(Button)`
-  background-color: #f67280;
-  color: #fff;
-
-  &:hover {
-    background-color: #e63946;
-  }
-`;
-
-const DetailsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
-`;
-
-const DetailsLabel = styled.span`
-  font-weight: bold;
-  color: #6c757d;
-`;
-
-const Details = styled.span`
-  font-size: 0.9rem;
 `;
 
 export default HotelCard;

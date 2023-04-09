@@ -56,6 +56,7 @@ function RoomCard({ room, hotelId }) {
           setShowBookingModal={setShowBookingModal}
           errors={errors}
           setErrors={setErrors}
+          navigate={navigate}
         />
       )}
     </CardContainer>

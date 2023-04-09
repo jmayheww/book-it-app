@@ -1,8 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// import { Button } from "../styles";
-// import { FaArrowLeft } from "react-icons/fa";
 import RoomCard from "../components/RoomCard";
 
 function ViewHotelPage({ hotels }) {
@@ -12,6 +10,7 @@ function ViewHotelPage({ hotels }) {
   // handle edge case where user refreshes page whilst in modal view
   useEffect(() => {
     navigate(`/hotels/${hotelId}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // find hotel by matching hotel id with hotelId from useParams
@@ -24,9 +23,25 @@ function ViewHotelPage({ hotels }) {
     <MainContainer>
       {viewHotel ? (
         <>
-          <div className="hotel-info">
+          <HotelInfo>
             <h1>{viewHotel.name}</h1>
-          </div>
+            <p>{viewHotel.description}</p>
+            <HotelDetails>
+              <HotelDetailItem>
+                <strong>Phone: </strong> {viewHotel.phone}
+              </HotelDetailItem>
+              <HotelDetailItem>
+                <strong>Website: </strong>{" "}
+                <a
+                  href={viewHotel.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {viewHotel.website}
+                </a>
+              </HotelDetailItem>
+            </HotelDetails>
+          </HotelInfo>
           <RoomsList>
             {hotelRooms.map((room) => {
               return (
@@ -42,6 +57,7 @@ function ViewHotelPage({ hotels }) {
     </MainContainer>
   );
 }
+
 export default ViewHotelPage;
 
 const MainContainer = styled.div`
@@ -51,6 +67,27 @@ const MainContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   padding-top: 80px;
+`;
+
+const HotelInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+`;
+
+const HotelDetails = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+  justify-content: center;
+`;
+
+const HotelDetailItem = styled.li`
+  font-size: 1.1rem;
 `;
 
 const RoomsList = styled.div`

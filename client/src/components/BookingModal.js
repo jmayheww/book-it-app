@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { RiCloseLine } from "react-icons/ri";
 import { Error } from "../styles/index";
@@ -11,16 +11,17 @@ function BookingModal({
   setShowBookingModal,
   errors,
   setErrors,
+  navigate,
 }) {
-  const { user, navigate } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
-  const [initialValue, setInitialValue] = useState({
+  const initialValue = {
     user_id: user?.id,
     room_id: roomId,
     check_in: "",
     check_out: "",
     number_of_guests: 1,
-  });
+  };
 
   const [booking, setBooking] = useState(initialValue);
 

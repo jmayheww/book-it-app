@@ -44,6 +44,8 @@ hotels = []
     address: Faker::Address.full_address,
     description: Faker::Lorem.paragraph,
     rating: rand(1..5),
+    phone: Faker::PhoneNumber.cell_phone,
+    website: Faker::Internet.url,
     image_url: Faker::LoremFlickr.image(size: '50x60', search_terms: ['hotel']),
     created_at: Time.now,
     updated_at: Time.now
