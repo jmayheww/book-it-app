@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
+
 import UserProfileCard from "../components/UserProfileCard";
 import MyBookingsList from "../components/MyBookingsList";
 import DeleteAccountModal from "../components/DeleteAccountModal";
@@ -36,8 +37,8 @@ const MyAccountContainer = styled.div`
 `;
 
 const IrreversibleButton = styled.button`
-  background-color: #ff4136;
-  color: white;
+  background-color: #1d3557; // Updated background color to match NavBar
+  color: #f1faee; // Updated font color to match NavBar's BackButton
   border: none;
   border-radius: 8px;
   padding: 12px 24px;
@@ -46,7 +47,7 @@ const IrreversibleButton = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #d90000;
+    background-color: #12344d; // Updated hover background color for better contrast
     cursor: pointer;
     transform: scale(1.05);
   }

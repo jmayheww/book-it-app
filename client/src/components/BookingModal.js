@@ -13,7 +13,7 @@ function BookingModal({
   setErrors,
   navigate,
 }) {
-  const { user } = useContext(UserContext);
+  const { user, setUserBookings } = useContext(UserContext);
 
   const initialValue = {
     user_id: user?.id,
@@ -38,7 +38,7 @@ function BookingModal({
       if (resp.ok) {
         return resp.json().then((data) => {
           console.log("data: ", data);
-
+          setUserBookings((prev) => [...prev, data]);
           setBooking(initialValue);
           setShowBookingModal(false);
         });
@@ -249,6 +249,19 @@ export const Label = styled.label`
   margin-bottom: 0.25rem;
 `;
 
+// export const DatePicker = styled.input`
+//   font-size: 1rem;
+//   padding: 0.5rem;
+//   border: 1px solid #1d3557;
+//   border-radius: 4px;
+//   color: #1d3557;
+//   background-color: #f1faee;
+//   &:focus {
+//     outline: none;
+//     border-color: #457b9d;
+//   }
+// `;
+
 export const DatePicker = styled.input`
   font-size: 1rem;
   padding: 0.5rem;
@@ -270,6 +283,19 @@ export const FormGroup = styled.div`
   margin-bottom: 1rem;
 `;
 
+// export const GuestsPicker = styled.select`
+//   font-size: 1rem;
+//   padding: 0.5rem;
+//   border: 1px solid #1d3557;
+//   border-radius: 4px;
+//   color: #1d3557;
+//   background-color: #f1faee;
+//   &:focus {
+//     outline: none;
+//     border-color: #457b9d;
+//   }
+// `;
+
 export const GuestsPicker = styled.select`
   font-size: 1rem;
   padding: 0.5rem;
@@ -288,6 +314,20 @@ export const ModalActions = styled.div`
   justify-content: center;
   margin-top: 2rem;
 `;
+
+// export const SubmitBtn = styled.button`
+//   background-color: #457b9d;
+//   color: white;
+//   padding: 0.5rem 1rem;
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   font-size: 1rem;
+//   transition: background-color 0.3s ease;
+//   &:hover {
+//     background-color: #1d3557;
+//   }
+// `;
 
 export const SubmitBtn = styled.button`
   background-color: #457b9d;

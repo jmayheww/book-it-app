@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect, useState, useContext } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import BookRoomModal from "./BookingModal";
 import UserContext from "../context/userAuth";
+import BookingModal from "./BookingModal";
 
 const AsyncHome = React.lazy(() => import("../pages/Home"));
 const AsyncMyAccount = React.lazy(() => import("../pages/MyAccount"));
@@ -33,7 +33,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // empty dependency array
 
-  console.log(user);
   return (
     <div className="App">
       {user && <NavBar showBackButton={showBackButton} />}
@@ -52,7 +51,7 @@ function App() {
               path="/hotels/:hotelId"
               element={<AsyncViewHotelPage hotels={hotels} />}
             >
-              <Route path="rooms/:room_id" element={<BookRoomModal />} />
+              <Route path="rooms/:room_id" element={<BookingModal />} />
             </Route>
             <Route exact path="/logout" element={<AsyncLogout />} />
 

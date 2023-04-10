@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Button } from "../styles";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function HotelCard({ hotel }) {
   const nav = useNavigate();
 
-  const { id, name, address, description, image_url, website } = hotel;
+  const { id, name, address, image_url, website } = hotel;
 
   function handleDetailsClick(id) {
     nav(`/hotels/${id}`);

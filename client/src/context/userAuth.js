@@ -19,6 +19,7 @@ const headers = {
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState("");
+  const [userBookings, setUserBookings] = useState([]);
   const [errors, setErrors] = useState([]);
   const [showLogin, setShowLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +66,7 @@ export const UserProvider = ({ children }) => {
     if (r.ok) {
       r.json().then((user) => {
         setUser(user);
+        setUserBookings(user.bookings);
       });
     } else {
       setUser(null);
@@ -108,6 +110,8 @@ export const UserProvider = ({ children }) => {
       value={{
         user,
         setUser,
+        userBookings,
+        setUserBookings,
         headers,
         signupUser,
         loginUser,

@@ -4,7 +4,6 @@ class Booking < ApplicationRecord
 
   validates :check_in, :check_out, :number_of_guests, :user_id, :room_id, presence: true
   validates :number_of_guests, numericality: { greater_than: 0 }
-  validates_uniqueness_of :room_id, uniqueness: { scope: %i[check_in check_out] }
 
   validate :does_not_overlap
   validate :guests_within_limit

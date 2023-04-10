@@ -165,7 +165,7 @@ function EditProfileModal({ setIsEditOpen }) {
               <ModalActions>
                 <ActionsContainer>
                   <SubmitBtn type="submit">Submit</SubmitBtn>
-                  <CancelBtn>Cancel</CancelBtn>
+                  <CancelBtn onClick={handleCloseClick}>Cancel</CancelBtn>
                 </ActionsContainer>
               </ModalActions>
             </form>

@@ -158,16 +158,38 @@ const Value = styled.span`
   color: #f8f9fa;
 `;
 
+// const PageWrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 60vh;
+
+//   padding: 16px;
+//   background-color: #f7f7f7;
+//   overflow-y: hidden;
+// `;
+
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 60vh;
-
   padding: 16px;
   background-color: #f7f7f7;
   overflow-y: hidden;
 `;
+
+// const ProfileWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   background-color: #49beb7;
+//   border-radius: 8px;
+//   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//   padding: 24px;
+//   width: 100%;
+//   max-width: 600px;
+// `;
 
 const ProfileWrapper = styled.div`
   display: flex;
