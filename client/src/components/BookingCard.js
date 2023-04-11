@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import EditBookingModal from "./EditBookingModal";
 
 function BookingCard({ booking }) {
-  console.log("booking: ", booking);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
+
+  function handleEditClick() {
+    setShowEditModal(true);
+    navigate(`/myaccount/bookings/${booking.id}`);
+  }
 
   const renderCardDetails = () => {
     if (!booking) return "Loading...";
@@ -27,11 +36,27 @@ function BookingCard({ booking }) {
         <p>Check-in: {check_in}</p>
         <p>Check-out: {check_out}</p>
         <p>Number of guests: {number_of_guests}</p>
+        <button onClick={handleEditClick}>Edit</button>
       </CardContainer>
     );
   };
 
-  return <div className="booking-detail">{renderCardDetails()}</div>;
+  return (
+    <div className="booking-detail">
+      {renderCardDetails()}
+      {showEditModal ? (
+        <EditBookingModal
+          booking={booking}
+          showEditModal={showEditModal}
+          setShowEditModal={setShowEditModal}
+          errors={errors}
+          setErrors={setErrors}
+        />
+      ) : (
+        ""
+      )}
+    </div>
+  );
 }
 
 const CardContainer = styled.div`

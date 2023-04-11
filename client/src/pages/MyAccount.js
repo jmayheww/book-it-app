@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 
 import UserProfileCard from "../components/UserProfileCard";
 import MyBookingsList from "../components/MyBookingsList";
@@ -18,6 +19,7 @@ function MyAccount() {
       <MyAccountContainer>
         <UserProfileCard />
         <MyBookingsList />
+        <Outlet />
       </MyAccountContainer>
       {/* <Routes>
         <Route path="/edit" element={<EditProfileModal />} />

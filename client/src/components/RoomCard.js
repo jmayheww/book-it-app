@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/userAuth";
-import BookingModal from "./BookingModal";
+import CreateBookingModal from "./CreateBookingModal";
 
 function RoomCard({ room, hotelId }) {
   const [showBookingModal, setShowBookingModal] = useState(false);
@@ -21,7 +21,7 @@ function RoomCard({ room, hotelId }) {
 
   function handleBookingModal() {
     setErrors([]);
-    setShowBookingModal(!showBookingModal);
+    setShowBookingModal(true);
     navigate(`/hotels/${hotelId}/rooms/${id}`);
 
     console.log("BOOKED!");
@@ -49,7 +49,7 @@ function RoomCard({ room, hotelId }) {
         </RoomContent>
       </RoomCardWrapper>
       {showBookingModal && (
-        <BookingModal
+        <CreateBookingModal
           roomTitle={room_title}
           roomId={id}
           showBookingModal={showBookingModal}

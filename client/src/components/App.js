@@ -2,7 +2,8 @@ import React, { Suspense, useEffect, useState, useContext } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import UserContext from "../context/userAuth";
-import BookingModal from "./BookingModal";
+import CreateBookingModal from "./CreateBookingModal";
+import EditBookingModal from "./EditBookingModal";
 
 const AsyncHome = React.lazy(() => import("../pages/Home"));
 const AsyncMyAccount = React.lazy(() => import("../pages/MyAccount"));
@@ -41,7 +42,13 @@ function App() {
           <Routes>
             <Route exact path="/" element={<AsyncHome />} />
             <Route exact path="/home" element={<AsyncHome />} />
-            <Route exact path="/myaccount" element={<AsyncMyAccount />} />
+            <Route exact path="/myaccount" element={<AsyncMyAccount />}>
+              <Route
+                path="bookings/:booking_id"
+                element={<EditBookingModal />}
+              />
+            </Route>
+
             <Route
               exact
               path="/hotels"
@@ -51,7 +58,7 @@ function App() {
               path="/hotels/:hotelId"
               element={<AsyncViewHotelPage hotels={hotels} />}
             >
-              <Route path="rooms/:room_id" element={<BookingModal />} />
+              <Route path="rooms/:room_id" element={<CreateBookingModal />} />
             </Route>
             <Route exact path="/logout" element={<AsyncLogout />} />
 

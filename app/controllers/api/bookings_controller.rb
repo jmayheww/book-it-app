@@ -7,6 +7,12 @@ class Api::BookingsController < ApplicationController
     render json: new_booking, status: :created
   end
 
+  def update
+    booking = Booking.find(params[:id])
+    booking.update!(booking_params)
+    render json: booking, status: :ok
+  end
+
   private
 
   def model

@@ -1,73 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { RiCloseLine } from "react-icons/ri";
 import { Error } from "../styles/index";
-import UserContext from "../context/userAuth";
 
-function BookingModal({
-  roomId,
-  roomTitle,
-  showBookingModal,
-  setShowBookingModal,
+function EditBookingModal({
+  booking,
+  showEditModal,
+  setShowEditModal,
   errors,
   setErrors,
-  navigate,
 }) {
-  const { user, setUserBookings } = useContext(UserContext);
-
-  const initialValue = {
-    user_id: user?.id,
-    room_id: roomId,
-    check_in: "",
-    check_out: "",
-    number_of_guests: 1,
-  };
-
-  const [booking, setBooking] = useState(initialValue);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setErrors([]);
-    fetch("/api/bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(booking),
-    }).then((resp) => {
-      if (resp.ok) {
-        return resp.json().then((data) => {
-          console.log("data: ", data);
-          setUserBookings((prev) => [...prev, data]);
-          setBooking(initialValue);
-          setShowBookingModal(false);
-        });
-      } else {
-        return resp.json().then((data) => {
-          if (data.errors) {
-            setErrors(data.errors);
-          } else {
-            setErrors([data.error]);
-          }
-        });
-      }
-    });
-
-    // TODO: Implement booking logic
-  }
-
-  function handleNewBooking(e) {
-    setBooking({ ...booking, [e.target.name]: e.target.value });
-  }
+  const [updateBooking, setUpdateBooking] = useState(booking);
 
   function handleCloseClick() {
-    setShowBookingModal(false);
-    navigate(-1);
+    setShowEditModal(false);
+  }
+
+  function handleUpdateBooking(e) {
+    setUpdateBooking({ ...updateBooking, [e.target.name]: e.target.value });
   }
 
   return (
     <>
-      {showBookingModal && (
+      {showEditModal && (
         <DarkBG>
           <Centered>
             <ModalHeader>
@@ -77,15 +32,14 @@ function BookingModal({
             </ModalHeader>
             <ModalHeaderLine />
             <ModalContent>
-              <ModalTitle>{` ${roomTitle}`}</ModalTitle>
               <DatePickers>
                 <DatePickerWrapper>
                   <Label>Check-in:</Label>
                   <DatePicker
                     type="date"
                     name="check_in"
-                    value={booking.check_in}
-                    onChange={handleNewBooking}
+                    value={updateBooking.check_in}
+                    onChange={handleUpdateBooking}
                   />
                 </DatePickerWrapper>
                 <DatePickerWrapper>
@@ -93,20 +47,20 @@ function BookingModal({
                   <DatePicker
                     type="date"
                     name="check_out"
-                    value={booking.check_out}
-                    onChange={handleNewBooking}
+                    value={updateBooking.check_out}
+                    onChange={handleUpdateBooking}
                   />
                 </DatePickerWrapper>
               </DatePickers>
               <div>
                 <FormContent>
-                  <form onSubmit={handleSubmit}>
+                  <form>
                     <FormGroup>
                       <Label>Guests:</Label>
                       <GuestsPicker
                         name="number_of_guests"
-                        value={booking.number_of_guests}
-                        onChange={handleNewBooking}
+                        value={updateBooking.number_of_guests}
+                        onChange={handleUpdateBooking}
                       >
                         {[...Array(10)].map((_, i) => (
                           <option key={i} value={i + 1}>
@@ -116,7 +70,7 @@ function BookingModal({
                       </GuestsPicker>
                     </FormGroup>
                     <ModalActions>
-                      <SubmitBtn type="submit">Submit Booking</SubmitBtn>
+                      {/* <SubmitBtn type="submit">Update Booking</SubmitBtn> */}
                     </ModalActions>
                   </form>
                 </FormContent>
@@ -137,11 +91,11 @@ function BookingModal({
 }
 
 const fixedCentered = `
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    `;
 
 export const DarkBG = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
@@ -249,19 +203,6 @@ export const Label = styled.label`
   margin-bottom: 0.25rem;
 `;
 
-// export const DatePicker = styled.input`
-//   font-size: 1rem;
-//   padding: 0.5rem;
-//   border: 1px solid #1d3557;
-//   border-radius: 4px;
-//   color: #1d3557;
-//   background-color: #f1faee;
-//   &:focus {
-//     outline: none;
-//     border-color: #457b9d;
-//   }
-// `;
-
 export const DatePicker = styled.input`
   font-size: 1rem;
   padding: 0.5rem;
@@ -283,19 +224,6 @@ export const FormGroup = styled.div`
   margin-bottom: 1rem;
 `;
 
-// export const GuestsPicker = styled.select`
-//   font-size: 1rem;
-//   padding: 0.5rem;
-//   border: 1px solid #1d3557;
-//   border-radius: 4px;
-//   color: #1d3557;
-//   background-color: #f1faee;
-//   &:focus {
-//     outline: none;
-//     border-color: #457b9d;
-//   }
-// `;
-
 export const GuestsPicker = styled.select`
   font-size: 1rem;
   padding: 0.5rem;
@@ -315,20 +243,6 @@ export const ModalActions = styled.div`
   margin-top: 2rem;
 `;
 
-// export const SubmitBtn = styled.button`
-//   background-color: #457b9d;
-//   color: white;
-//   padding: 0.5rem 1rem;
-//   border: none;
-//   border-radius: 4px;
-//   cursor: pointer;
-//   font-size: 1rem;
-//   transition: background-color 0.3s ease;
-//   &:hover {
-//     background-color: #1d3557;
-//   }
-// `;
-
 export const SubmitBtn = styled.button`
   background-color: #457b9d;
   color: white;
@@ -347,4 +261,4 @@ const ErrorsWrapper = styled.div`
   margin-top: 1rem;
 `;
 
-export default BookingModal;
+export default EditBookingModal;
