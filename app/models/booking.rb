@@ -8,17 +8,12 @@ class Booking < ApplicationRecord
   validate :does_not_overlap
   validate :guests_within_limit
   validate :check_out_is_after_check_in
-  validate :check_in_already_passed
-  validate :check_out_already_passed
+  validate :booking_date_in_past
 
   private
 
-  def check_in_already_passed
-    errors.add(:check_in, 'date has already passed') if check_in && check_in < Date.today
-  end
-
-  def check_out_already_passed
-    errors.add(:check_out, 'date has already passed') if check_out && check_out < Date.today
+  def booking_date_in_past
+    errors.add(:base, 'Room cannot be booked for dates that have already passed') if check_in && check_in < Date.today
   end
 
   def check_out_is_after_check_in
