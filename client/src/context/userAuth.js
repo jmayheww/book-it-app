@@ -79,6 +79,7 @@ export const UserProvider = ({ children }) => {
       setIsLoading(false);
       r.json().then((user) => {
         setUser(user);
+        setUserBookings(user.bookings);
         navigate("/myaccount");
       });
     } else {

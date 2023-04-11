@@ -5,6 +5,7 @@ import EditBookingModal from "./EditBookingModal";
 import UserContext from "../context/userAuth";
 
 function BookingCard({ booking }) {
+  console.log("booking: ", booking);
   const [showEditModal, setShowEditModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const { userBookings, setUserBookings } = useContext(UserContext);
@@ -47,15 +48,13 @@ function BookingCard({ booking }) {
   const renderCardDetails = () => {
     if (!booking) return "Loading...";
 
-    const {
-      check_in,
-      check_out,
-      number_of_guests,
-      room: { room_title, price_per_night },
-      room: {
-        hotel: { name, address },
-      },
-    } = booking;
+    const check_in = booking?.check_in;
+    const check_out = booking?.check_out;
+    const number_of_guests = booking?.number_of_guests;
+    const room_title = booking?.room?.room_title;
+    const price_per_night = booking?.room?.price_per_night;
+    const name = booking?.room?.hotel?.name;
+    const address = booking?.room?.hotel?.address;
 
     return (
       <CardContainer>

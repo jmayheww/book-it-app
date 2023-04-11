@@ -1,6 +1,6 @@
 class Api::BookingsController < ApplicationController
   include ApiResource
-  before_action :authenticate_user!
+
   rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_record_resp
   rescue_from ActiveRecord::RecordNotUnique, with: :render_unique_violation_response
   def create
@@ -36,13 +36,6 @@ class Api::BookingsController < ApplicationController
 
   def model
     Booking
-  end
-
-  def authenticate_user!
-    # if user is not logged in
-    return if session[:user_id]
-
-    render json: { error: 'Not authorized' }, status: :unauthorized
   end
 
   def booking_params
