@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import UserProfileCard from "../components/UserProfileCard";
 import MyBookingsList from "../components/MyBookingsList";
@@ -8,6 +9,12 @@ import DeleteAccountModal from "../components/DeleteAccountModal";
 
 function MyAccount() {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // reset client route if user refreshes page while in modal
+  useEffect(() => {
+    navigate("/myaccount");
+  }, []);
 
   function activateDeleteAccountModal() {
     setIsDeleteOpen(true);
@@ -17,8 +24,10 @@ function MyAccount() {
   return (
     <>
       <MyAccountContainer>
-        <UserProfileCard />
-        <MyBookingsList />
+        <Wrapper>
+          <UserProfileCard />
+          <MyBookingsList />
+        </Wrapper>
         <Outlet />
       </MyAccountContainer>
       {/* <Routes>
@@ -35,7 +44,7 @@ function MyAccount() {
 }
 
 const MyAccountContainer = styled.div`
-  padding-top: 80px; // Added top padding
+  padding-top: 80px;
 `;
 
 const IrreversibleButton = styled.button`
@@ -53,6 +62,13 @@ const IrreversibleButton = styled.button`
     cursor: pointer;
     transform: scale(1.05);
   }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 `;
 
 export default MyAccount;

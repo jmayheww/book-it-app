@@ -23,7 +23,7 @@ class Booking < ApplicationRecord
   def does_not_overlap
     overlapping_bookings = Booking.where(room_id: room_id)
                                   .where.not(id: id)
-                                  .where('check_in < ? AND check_out > ?', check_out, check_in)
+                                  .where('check_in <= ? AND check_out >= ?', check_out, check_in)
 
     return unless overlapping_bookings.exists?
 

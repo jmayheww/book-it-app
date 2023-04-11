@@ -72,7 +72,7 @@ const fixedCentered = css`
   transform: translate(-50%, -50%);
 `;
 
-export const DarkBG = styled.div`
+const DarkBG = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
@@ -82,12 +82,12 @@ export const DarkBG = styled.div`
   ${fixedCentered}
 `;
 
-export const Centered = styled.div`
+const Centered = styled.div`
   ${fixedCentered}
   z-index: 10;
 `;
 
-export const Modal = styled.div`
+const Modal = styled.div`
   width: 300px;
   height: 200px;
   background: white;
@@ -124,7 +124,7 @@ const DeleteModal = styled(Modal)`
   }
 `;
 
-export const ModalHeader = styled.div`
+const ModalHeader = styled.div`
   height: 50px;
   display: flex;
   justify-content: flex-end;
@@ -136,14 +136,14 @@ export const ModalHeader = styled.div`
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
 `;
 
-export const Heading = styled.h3`
+const Heading = styled.h3`
   margin: 0;
   color: #5c5c5c;
   font-weight: 500;
   font-size: 18px;
 `;
 
-export const ModalContent = styled.div`
+const ModalContent = styled.div`
   padding: 20px;
   font-size: 14px;
   color: #5c5c5c;
@@ -155,7 +155,7 @@ export const ModalContent = styled.div`
   background-color: #f7cac9;
 `;
 
-export const ModalActions = styled.div`
+const ModalActions = styled.div`
   margin-top: auto;
   padding: 20px;
   width: 100%;
@@ -167,7 +167,7 @@ export const ModalActions = styled.div`
   border-bottom-right-radius: 12px;
 `;
 
-export const ActionsContainer = styled.div`
+const ActionsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -188,7 +188,7 @@ const buttonStyles = css`
   }
 `;
 
-export const SubmitBtn = styled.button`
+const SubmitBtn = styled.button`
   ${buttonStyles}
   color: white;
   background: #f67280;
@@ -199,7 +199,7 @@ export const SubmitBtn = styled.button`
   }
 `;
 
-export const CancelBtn = styled.button`
+const CancelBtn = styled.button`
   ${buttonStyles}
   background-color: #f7cac9;
   color: #5c5c5c;
@@ -210,7 +210,7 @@ export const CancelBtn = styled.button`
     background: #d5d5d5;
   }
 `;
-export const CloseBtn = styled.button`
+const CloseBtn = styled.button`
   cursor: pointer;
   font-weight: 500;
   padding: 4px 8px;

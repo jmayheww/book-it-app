@@ -13,6 +13,12 @@ class Api::BookingsController < ApplicationController
     render json: booking, status: :ok
   end
 
+  def destroy
+    booking = Booking.find(params[:id])
+    booking.destroy
+    render json: { message: 'Booking deleted' }, status: :ok
+  end
+
   private
 
   def model

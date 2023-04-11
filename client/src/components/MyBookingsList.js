@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import UserContext from "../context/userAuth";
 import BookingCard from "./BookingCard";
+import styled from "styled-components";
 
 function MyBookingsList() {
   const { userBookings } = useContext(UserContext);
   const currentDate = new Date();
-  console.log("userBookings: ", userBookings);
 
   const upcomingBookings = userBookings
     ?.filter((booking) => new Date(booking.check_in) > currentDate)
@@ -18,31 +18,56 @@ function MyBookingsList() {
     .slice(0, 4);
 
   const renderUpcomingBookings = upcomingBookings?.map((booking) => {
-    console.log("upcoming bookings: ", booking);
     return <BookingCard key={booking.id} booking={booking} />;
   });
 
   const renderPastBookings = pastBookings?.map((booking) => {
-    console.log("past bookings: ", booking);
     return <BookingCard key={booking.id} booking={booking} />;
   });
 
   return (
-    <div className="booking-list">
+    <BookingsListWrapper>
       {upcomingBookings && upcomingBookings.length > 0 && (
-        <div>
-          <h2>Upcoming Bookings</h2>
-          {renderUpcomingBookings}
-        </div>
+        <BookingSection>
+          <BookingTitle>Upcoming Bookings</BookingTitle>
+          <BookingContainer>{renderUpcomingBookings}</BookingContainer>
+        </BookingSection>
       )}
       {pastBookings && pastBookings.length > 0 && (
-        <div>
-          <h2>Past Bookings</h2>
-          {renderPastBookings}
-        </div>
+        <BookingSection>
+          <BookingTitle>Past Bookings</BookingTitle>
+          <BookingContainer>{renderPastBookings}</BookingContainer>
+        </BookingSection>
       )}
-    </div>
+    </BookingsListWrapper>
   );
 }
+const BookingsListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-top: 32px;
+  width: 100%;
+`;
+
+const BookingTitle = styled.h2`
+  text-align: center;
+  width: 100%;
+`;
+
+const BookingSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const BookingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  width: 100%;
+`;
 
 export default MyBookingsList;

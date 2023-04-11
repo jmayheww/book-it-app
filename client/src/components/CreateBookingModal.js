@@ -12,7 +12,6 @@ function CreateBookingModal({
   errors,
   setErrors,
   navigate,
-  onClose,
 }) {
   const { user, setUserBookings } = useContext(UserContext);
 
@@ -54,8 +53,6 @@ function CreateBookingModal({
         });
       }
     });
-
-    // TODO: Implement booking logic
   }
 
   function handleNewBooking(e) {
@@ -63,7 +60,7 @@ function CreateBookingModal({
   }
 
   function handleCloseClick() {
-    onClose();
+    setShowBookingModal(false);
     navigate(-1);
   }
 
@@ -118,7 +115,10 @@ function CreateBookingModal({
                       </GuestsPicker>
                     </FormGroup>
                     <ModalActions>
-                      <SubmitBtn type="submit">Submit Booking</SubmitBtn>
+                      <SubmitBtn type="submit">Create Booking</SubmitBtn>
+                      <CancelBtn onClick={() => handleCloseClick()}>
+                        Cancel
+                      </CancelBtn>
                     </ModalActions>
                   </form>
                 </FormContent>
@@ -145,7 +145,7 @@ const fixedCentered = `
   transform: translate(-50%, -50%);
 `;
 
-export const DarkBG = styled.div`
+const DarkBG = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   width: 100vw;
   height: 100vh;
@@ -155,7 +155,7 @@ export const DarkBG = styled.div`
   ${fixedCentered}
 `;
 
-export const Centered = styled.div`
+const Centered = styled.div`
   ${fixedCentered}
   z-index: 10;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
@@ -185,24 +185,24 @@ export const Centered = styled.div`
   }
 `;
 
-export const ModalContent = styled.div`
+const ModalContent = styled.div`
   padding: 24px;
 `;
 
-export const ModalHeader = styled.div`
+const ModalHeader = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1rem;
 `;
 
-export const ModalHeaderLine = styled.hr`
+const ModalHeaderLine = styled.hr`
   width: 100%;
   border: 0;
   border-top: 1px solid #e0e0e0;
   margin-bottom: 1rem;
 `;
 
-export const CloseBtn = styled.button`
+const CloseBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -217,7 +217,7 @@ export const CloseBtn = styled.button`
   }
 `;
 
-export const ModalTitle = styled.h2`
+const ModalTitle = styled.h2`
   font-size: 2rem;
   margin-bottom: 1.5rem;
   color: #1d3557;
@@ -232,26 +232,26 @@ export const ModalTitle = styled.h2`
   }
 `;
 
-export const DatePickers = styled.div`
+const DatePickers = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1rem;
 `;
 
-export const DatePickerWrapper = styled.div`
+const DatePickerWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const Label = styled.label`
+const Label = styled.label`
   font-size: 1rem;
   font-weight: 600;
   color: #1d3557;
   margin-bottom: 0.25rem;
 `;
 
-export const DatePicker = styled.input`
+const DatePicker = styled.input`
   font-size: 1rem;
   padding: 0.5rem;
   border: 1px solid #1d3557;
@@ -264,15 +264,15 @@ export const DatePicker = styled.input`
   }
 `;
 
-export const FormContent = styled.div``;
+const FormContent = styled.div``;
 
-export const FormGroup = styled.div`
+const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 `;
 
-export const GuestsPicker = styled.select`
+const GuestsPicker = styled.select`
   font-size: 1rem;
   padding: 0.5rem;
   border: 1px solid #1d3557;
@@ -285,13 +285,13 @@ export const GuestsPicker = styled.select`
   }
 `;
 
-export const ModalActions = styled.div`
+const ModalActions = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
 `;
 
-export const SubmitBtn = styled.button`
+const SubmitBtn = styled.button`
   background-color: #457b9d;
   color: white;
   padding: 0.5rem 1rem;
@@ -302,6 +302,21 @@ export const SubmitBtn = styled.button`
   transition: background-color 0.3s ease;
   &:hover {
     background-color: #1d3557;
+  }
+`;
+
+const CancelBtn = styled.button`
+  background-color: #e63946;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-left: 1rem;
+  &:hover {
+    background-color: #9d0208;
   }
 `;
 
