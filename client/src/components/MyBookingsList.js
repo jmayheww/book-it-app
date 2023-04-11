@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 function MyBookingsList() {
   const { userBookings } = useContext(UserContext);
+  console.log("userBookings: ", userBookings);
   const currentDate = new Date();
 
   const upcomingBookings = userBookings
@@ -61,13 +62,25 @@ const BookingSection = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-
 const BookingContainer = styled.div`
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 32px;
-  width: 100%;
-`;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+  margin-top: 0px;
+  padding: 0px 20px 20px;
 
+  @media (max-width: 1200px) {
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: 992px) {
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+`;
 export default MyBookingsList;

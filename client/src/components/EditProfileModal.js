@@ -37,343 +37,334 @@ function EditProfileModal({ setIsEditOpen }) {
 
   return (
     <>
-      <DarkBG />
-      <Centered>
-        <ModalHeader>
-          <CloseBtn onClick={() => handleCloseClick()}>
-            <RiCloseLine />
-          </CloseBtn>
-        </ModalHeader>
-        <ProfileModal>
-          <ModalContent>Please change the following details:</ModalContent>
+      <ModalWrapper>
+        <DarkBG />
+        <Modal>
+          <ModalHeader>
+            <CloseBtn onClick={handleCloseClick}>
+              <RiCloseLine />
+            </CloseBtn>
+          </ModalHeader>
+          <ModalContent>
+            <h2>Edit Profile</h2>
+            <ScrollContainer>
+              <form onSubmit={handleSubmit}>
+                <FormGroup>
+                  <label>Email:</label>
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={updatedUser?.email || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>First Name:</label>
+                  <Input
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    value={updatedUser?.first_name || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>Last Name:</label>
+                  <Input
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    value={updatedUser?.last_name || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>Phone Number:</label>
+                  <Input
+                    type="tel"
+                    name="phone_number"
+                    placeholder="Phone Number"
+                    value={updatedUser?.phone_number || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
 
-          <FormContent>
-            <form onSubmit={handleSubmit}>
-              <FormGroup>
-                <label>Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={updatedUser?.email || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>First Name:</label>
-                <input
-                  type="text"
-                  name="first_name"
-                  placeholder="First Name"
-                  value={updatedUser?.first_name || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>Last Name:</label>
-                <input
-                  type="text"
-                  name="last_name"
-                  placeholder="Last Name"
-                  value={updatedUser?.last_name || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>Phone Number:</label>
-                <input
-                  type="tel"
-                  name="phone_number"
-                  placeholder="Phone Number"
-                  value={updatedUser?.phone_number || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
+                <FormGroup>
+                  <label>Address:</label>
+                  <Input
+                    type="text"
+                    name="address"
+                    placeholder="Address"
+                    value={updatedUser?.address || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>City:</label>
+                  <Input
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    value={updatedUser?.city || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>State:</label>
+                  <Input
+                    type="text"
+                    name="state"
+                    placeholder="State"
+                    value={updatedUser?.state || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>Country:</label>
+                  <Input
+                    type="text"
+                    name="country"
+                    placeholder="Country"
+                    value={updatedUser?.country || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
 
-              <FormGroup>
-                <label>Address:</label>
-                <input
-                  type="text"
-                  name="address"
-                  placeholder="Address"
-                  value={updatedUser?.address || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>City:</label>
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={updatedUser?.city || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>State:</label>
-                <input
-                  type="text"
-                  name="state"
-                  placeholder="State"
-                  value={updatedUser?.state || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>Country:</label>
-                <input
-                  type="text"
-                  name="country"
-                  placeholder="Country"
-                  value={updatedUser?.country || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <label>Passport Number:</label>
-                <input
-                  type="text"
-                  name="passport_number"
-                  placeholder="Passport Number"
-                  value={updatedUser?.passport_number || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>Date of Birth:</label>
-                <input
-                  type="date"
-                  name="date_of_birth"
-                  placeholder="Date of Birth"
-                  value={updatedUser?.date_of_birth || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label>Avatar:</label>
-                <input
-                  type="text"
-                  name="avatar_url"
-                  placeholder="Avatar"
-                  value={updatedUser?.avatar_url || ""}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-
-              <ModalActions>
+                <FormGroup>
+                  <label>Passport Number:</label>
+                  <Input
+                    type="text"
+                    name="passport_number"
+                    placeholder="Passport Number"
+                    value={updatedUser?.passport_number || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>Date of Birth:</label>
+                  <Input
+                    type="date"
+                    name="date_of_birth"
+                    placeholder="Date of Birth"
+                    value={updatedUser?.date_of_birth || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label>Avatar:</label>
+                  <Input
+                    type="text"
+                    name="avatar_url"
+                    placeholder="Avatar"
+                    value={updatedUser?.avatar_url || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
                 <ActionsContainer>
-                  <SubmitBtn type="submit">Submit</SubmitBtn>
-                  <CancelBtn onClick={handleCloseClick}>Cancel</CancelBtn>
+                  <ModalActions>
+                    <SubmitBtn type="submit">Submit</SubmitBtn>
+                    <CancelBtn onClick={handleCloseClick}>Cancel</CancelBtn>
+                  </ModalActions>
                 </ActionsContainer>
-              </ModalActions>
-            </form>
-          </FormContent>
-        </ProfileModal>
-      </Centered>
+              </form>
+            </ScrollContainer>
+          </ModalContent>
+        </Modal>
+      </ModalWrapper>
     </>
   );
 }
-
-const fixedCentered = css`
+const ModalWrapper = styled.div`
   position: fixed;
-  top: 50%;
+  top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
-`;
+  transform: translate(-50%, -10%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
 
+  @media (max-width: 768px) {
+    top: 30%;
+  }
+`;
 const DarkBG = styled.div`
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
+  position: fixed;
   top: 0;
   left: 0;
-  ${fixedCentered}
-`;
-
-const Centered = styled.div`
-  ${fixedCentered}
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
 `;
 
 const Modal = styled.div`
-  width: 300px;
-  height: 200px;
-  background: white;
-  color: deeppink;
-  z-index: 10;
-  border-radius: 16px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-`;
-
-const ProfileModal = styled(Modal)`
-  width: 600px;
-  height: 500px;
-  background: #49beb7;
+  position: relative;
+  background-color: #ffffff;
+  padding: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  width: 50%; // Changed width to 50% to give it more width
+  max-width: 600px;
+  min-width: 500px; // Added a minimum width to prevent the modal from becoming too narrow
+  max-height: 80%;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
 
-  ::-webkit-scrollbar {
-    width: 10px;
-    background-color: #f67280;
-    border-radius: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background-color: #f67280;
-  }
-
-  ::-webkit-scrollbar-track {
-    border-radius: 16px;
-    background-color: white;
+  @media (max-width: 768px) {
+    max-height: calc(100% - 40px);
+    padding: 20px;
+    border-radius: 0;
   }
 `;
-
 const ModalHeader = styled.div`
-  height: 50px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 16px;
-  background: #f67280;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
-`;
-
-const Heading = styled.h3`
-  margin: 0;
-  color: white;
-  font-weight: 500;
-  font-size: 18px;
+  position: absolute;
+  top: 8px;
+  right: 16px;
 `;
 
 const ModalContent = styled.div`
   padding: 10px;
   font-size: 14px;
-  color: #f8f9fa;
-  text-align: center;
+  color: #333;
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
   height: auto;
 `;
 
-const FormContent = styled.div`
-  padding: 10px;
-  font-size: 14px;
-  color: #f8f9fa;
-  display: flex;
-  flex-direction: column;
-  height: auto;
-
-  input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-  ::placeholder {
-    font-size: large;
-  }
-`;
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+  }
+  input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    &:focus {
+      outline: none;
+      border-color: #49beb7;
+    }
+  }
 `;
 
 const ModalActions = styled.div`
-  margin-top: auto;
-  padding: 10px;
-  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #49beb7;
-`;
-
-const ActionsContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 50%;
-  padding: 0 10px;
+  justify-content: space-between;
+  margin-top: 1rem;
 `;
 
 const buttonStyles = css`
   cursor: pointer;
   font-weight: 500;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  border-radius: 4px;
+  font-size: 1rem;
   border: none;
-  padding: 11px 28px;
+  padding: 8px 16px;
   transition: all 0.25s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
   }
 `;
 
 const SubmitBtn = styled.button`
-  ${buttonStyles}
-  color: #f67280;
-  background: white;
-  border: 2px solid #f67280;
-
+  background-color: #457b9d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
   &:hover {
-    box-shadow: 0 10px 20px -10px rgba(230, 57, 70, 0.6);
-    color: white;
-    background: #f67280;
+    background-color: #1d3557;
+  }
+`;
+const CloseBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1d3557;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: -10px;
+  right: 0;
+  &:hover {
+    color: #e63946;
   }
 `;
 
 const CancelBtn = styled.button`
-  ${buttonStyles}
-  background-color: white; // Secondary color
-  color: #f67280; // Text color
-  border: 2px solid #f67280;
-
-  &:hover {
-    background: hsl(235deg 85% 97%);
-  }
-
-  &:hover {
-    box-shadow: 0 10px 20px -10px rgba(230, 57, 70, 0.6);
-    color: white;
-    background: #f67280;
-  }
-`;
-
-const CloseBtn = styled.button`
+  background-color: #e63946;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 8px;
-  border: 2px solid #f67280;
-  font-size: 18px;
-  color: #f67280;
-  background: #f1faee;
-  transition: all 0.25s ease;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-left: 1rem;
   &:hover {
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-    transform: translateY(-5px);
+    background-color: #9d0208;
   }
 `;
 
+// const CloseBtn = styled.button`
+//   background-color: transparent;
+//   border: none;
+//   font-size: 24px;
+//   cursor: pointer;
+//   color: #f44336;
+//   transition: all 0.2s ease;
+
+//   &:hover {
+//     color: #b71c1c;
+//     transform: scale(1.1);
+//   }
+// `;
+
+const ActionsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+  gap: 40px; // Increased the gap from 20px to 40px
+`;
+
+const Input = styled.input`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #49beb7;
+  }
+`;
+
+const ScrollContainer = styled.div`
+  overflow-y: auto;
+  max-height: calc(100vh - 340px); // Adjust the height calculation
+
+  @media (max-width: 768px) {
+    max-height: calc(
+      100vh - 400px
+    ); // Adjust the height calculation for smaller screens
+  }
+`;
 export default EditProfileModal;

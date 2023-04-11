@@ -14,6 +14,7 @@ function CreateBookingModal({
   navigate,
 }) {
   const { user, setUserBookings } = useContext(UserContext);
+  console.log("user: ", user);
 
   const initialValue = {
     user_id: user?.id,

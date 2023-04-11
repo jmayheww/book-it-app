@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useState, useContext } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import UserContext from "../context/userAuth";
 import CreateBookingModal from "./CreateBookingModal";
@@ -37,7 +38,7 @@ function App() {
   return (
     <div className="App">
       {user && <NavBar showBackButton={showBackButton} />}
-      <main>
+      <MainContent>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route exact path="/" element={<AsyncHome />} />
@@ -75,9 +76,17 @@ function App() {
             {user && <Route path="*" element={<Navigate to="/home" />} />}
           </Routes>
         </Suspense>
-      </main>
+      </MainContent>
     </div>
   );
 }
+
+const MainContent = styled.div`
+  padding-top: 80px;
+
+  @media screen and (max-width: 768px) {
+    padding-top: 100px;
+  }
+`;
 
 export default App;

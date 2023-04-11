@@ -1,5 +1,6 @@
 class Api::BookingsController < ApplicationController
   include ApiResource
+  before_action :authenticate_user!
   rescue_from ActiveRecord::RecordInvalid, with: :render_invalid_record_resp
   rescue_from ActiveRecord::RecordNotUnique, with: :render_unique_violation_response
   def create
@@ -8,21 +9,40 @@ class Api::BookingsController < ApplicationController
   end
 
   def update
+    current_user = User.find_by(id: session[:user_id])
     booking = Booking.find(params[:id])
-    booking.update!(booking_params)
-    render json: booking, status: :ok
+
+    if current_user.id == booking.user_id
+      booking.update!(booking_params)
+      render json: booking, status: :ok
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
+    end
   end
 
   def destroy
+    current_user = User.find_by(id: session[:user_id])
     booking = Booking.find(params[:id])
-    booking.destroy
-    render json: { message: 'Booking deleted' }, status: :ok
+
+    if current_user.id == booking.user_id
+      booking.destroy
+      render json: { message: 'Booking deleted' }, status: :ok
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
+    end
   end
 
   private
 
   def model
     Booking
+  end
+
+  def authenticate_user!
+    # if user is not logged in
+    return if session[:user_id]
+
+    render json: { error: 'Not authorized' }, status: :unauthorized
   end
 
   def booking_params

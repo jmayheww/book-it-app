@@ -50,6 +50,7 @@ const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 6px;
+  padding-bottom: 20px;
   z-index: 1000;
   position: fixed;
   top: 0;
@@ -59,6 +60,7 @@ const Wrapper = styled.header`
   box-sizing: border-box;
   width: 100%;
   height: 70px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); // Added box-shadow
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
