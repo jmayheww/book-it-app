@@ -3,7 +3,7 @@ import styled from "styled-components";
 import HotelCard from "../components/HotelCard";
 
 function HotelsList({ hotels }) {
-  const renderHotels = hotels.map((hotel) => {
+  const renderHotels = hotels?.map((hotel) => {
     return <HotelCard key={hotel.id} hotel={hotel} />;
   });
 
@@ -24,7 +24,7 @@ const HotelsListContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin: 20px;
-  padding: 80px 20px 20px; // Added top padding
+  padding: 100px 20px 20px;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

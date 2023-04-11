@@ -2,28 +2,36 @@ import React from "react";
 import styled from "styled-components";
 
 function BookingCard({ booking }) {
-  const {
-    id,
-    check_in,
-    check_out,
-    number_of_guests,
-    room: { room_title, price_per_night },
-    room: {
-      hotel: { name, address },
-    },
-  } = booking;
+  console.log("booking: ", booking);
 
-  return (
-    <CardContainer>
-      <h3>{name}</h3>
-      <p>{address}</p>
-      <p>Room: {room_title}</p>
-      <p>Price per night: ${price_per_night}</p>
-      <p>Check-in: {check_in}</p>
-      <p>Check-out: {check_out}</p>
-      <p>Number of guests: {number_of_guests}</p>
-    </CardContainer>
-  );
+  const renderCardDetails = () => {
+    if (!booking) return "Loading...";
+
+    const {
+      id,
+      check_in,
+      check_out,
+      number_of_guests,
+      room: { room_title, price_per_night },
+      room: {
+        hotel: { name, address },
+      },
+    } = booking;
+
+    return (
+      <CardContainer>
+        <h3>{name}</h3>
+        <p>{address}</p>
+        <p>Room: {room_title}</p>
+        <p>Price per night: ${price_per_night}</p>
+        <p>Check-in: {check_in}</p>
+        <p>Check-out: {check_out}</p>
+        <p>Number of guests: {number_of_guests}</p>
+      </CardContainer>
+    );
+  };
+
+  return <div className="booking-detail">{renderCardDetails()}</div>;
 }
 
 const CardContainer = styled.div`
