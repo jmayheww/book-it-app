@@ -41,6 +41,11 @@ class Api::BookingsController < ApplicationController
   end
 
   def authorize_user
+    if @current_user.nil? || @booking.nil?
+      render json: { error: 'Not authorized' }, status: :unauthorized
+      return
+    end
+
     return if @current_user.id == @booking.user_id
 
     render json: { error: 'Not authorized' }, status: :unauthorized

@@ -34,11 +34,7 @@ export const UserProvider = ({ children }) => {
       method: "POST",
       headers: headers,
       body: JSON.stringify(formData),
-    })
-      .then(authResponseHandler)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(authResponseHandler);
   };
 
   const signupUser = (formData) => {
@@ -46,11 +42,7 @@ export const UserProvider = ({ children }) => {
       method: "POST",
       headers: headers,
       body: JSON.stringify(formData),
-    })
-      .then(authResponseHandler)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(authResponseHandler);
   };
 
   const logoutUser = () => {

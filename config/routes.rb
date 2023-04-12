@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :users
+    resources :users, only: %i[show create update destroy]
 
-    resources :hotels, only: %i[index show], shallow: true do
-      resources :rooms, only: %i[index show]
-    end
+    resources :hotels, only: %i[index]
 
-    resources :bookings
-    resources :rooms
+    resources :bookings, only: %i[create update destroy]
 
     post '/signup', to: 'users#create'
     post '/login', to: 'sessions#create'

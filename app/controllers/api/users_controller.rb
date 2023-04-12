@@ -1,4 +1,6 @@
 class Api::UsersController < ApplicationController
+  before_action :set_current_user, only: %i[show update destroy]
+
   rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
   rescue_from ActiveRecord::RecordNotUnique, with: :render_unique_violation_response
@@ -10,40 +12,37 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    current_user = User.find_by(id: session[:user_id])
-
-    if current_user
-      render json: current_user, include: ['bookings', 'bookings.room', 'bookings.room.hotel'], status: :created
+    if @current_user
+      render json: @current_user, include: ['bookings', 'bookings.room', 'bookings.room.hotel'], status: :created
     else
       render json: { error: 'Not authorized' }, status: :unauthorized
     end
   end
 
   def update
-    updated_user = User.find_by(id: params[:id])
-    updated_user.update!(profile_params)
-    render json: updated_user, status: :ok
+    if @current_user
+
+      @current_user.update!(profile_params)
+      render json: @current_user, status: :ok
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
+    end
   end
 
-  # def update_profile
-  #   current_user = User.find_by(id: session[:user_id])
-
-  #   if current_user
-  #     current_user.update!(profile_params)
-
-  #     render json: current_user, status: :ok
-  #   else
-  #     render json: { error: 'Not authorized' }, status: :unauthorized
-  #   end
-  # end
-
   def destroy
-    user = User.find_by(id: params[:id])
-    user.destroy
-    render json: { message: 'User deleted' }, status: :ok
+    if @current_user
+      @current_user.destroy
+      render json: { message: 'User deleted' }, status: :ok
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
+    end
   end
 
   private
+
+  def set_current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
 
   def user_params
     params.permit(:email, :password, :password_confirmation)
