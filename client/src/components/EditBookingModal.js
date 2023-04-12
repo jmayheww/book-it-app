@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { RiCloseLine } from "react-icons/ri";
@@ -164,7 +164,7 @@ const Centered = styled.div`
   padding: 1rem;
   width: 500px;
   max-width: 90vw;
-  top: calc(15% + 30px); // Adjust the modal position
+  top: calc(15% + 30px);
   left: 50%;
   transform: translateX(-50%);
 

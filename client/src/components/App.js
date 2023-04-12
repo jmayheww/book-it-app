@@ -11,7 +11,6 @@ const AsyncMyAccount = React.lazy(() => import("../pages/MyAccount"));
 const AsyncLogin = React.lazy(() => import("../pages/Login"));
 const AsyncHotelsList = React.lazy(() => import("../pages/HotelsList"));
 const AsyncViewHotelPage = React.lazy(() => import("../pages/ViewHotelPage"));
-const AsyncLogout = React.lazy(() => import("../pages/Logout"));
 
 function App() {
   const { user, fetchCurrentUser } = useContext(UserContext);
@@ -23,7 +22,6 @@ function App() {
     fetch("/api/hotels")
       .then((resp) => resp.json())
       .then((data) => {
-        console.log("data: ", data);
         sethotels(data);
       });
   }
@@ -61,7 +59,6 @@ function App() {
             >
               <Route path="rooms/:room_id" element={<CreateBookingModal />} />
             </Route>
-            <Route exact path="/logout" element={<AsyncLogout />} />
 
             {!user && (
               <>

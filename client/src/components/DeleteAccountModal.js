@@ -17,8 +17,7 @@ function DeleteAccountModal({ setIsDeleteOpen }) {
       },
     })
       .then((resp) => resp.json())
-      .then((data) => {
-        console.log("data: ", data);
+      .then(() => {
         setErrors([]);
         setUser(null);
         setUserBookings(null);
@@ -134,13 +133,6 @@ const ModalHeader = styled.div`
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
-`;
-
-const Heading = styled.h3`
-  margin: 0;
-  color: #5c5c5c;
-  font-weight: 500;
-  font-size: 18px;
 `;
 
 const ModalContent = styled.div`

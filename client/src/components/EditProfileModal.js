@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { RiCloseLine } from "react-icons/ri";
 import UserContext from "../context/userAuth";
 
@@ -206,9 +206,9 @@ const Modal = styled.div`
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   z-index: 20;
-  width: 50%; // Changed width to 50% to give it more width
+  width: 50%;
   max-width: 600px;
-  min-width: 500px; // Added a minimum width to prevent the modal from becoming too narrow
+  min-width: 500px;
   max-height: 80%;
   overflow-y: auto;
 
@@ -261,20 +261,6 @@ const ModalActions = styled.div`
   margin-top: 1rem;
 `;
 
-const buttonStyles = css`
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 4px;
-  font-size: 1rem;
-  border: none;
-  padding: 8px 16px;
-  transition: all 0.25s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-`;
-
 const SubmitBtn = styled.button`
   background-color: #457b9d;
   color: white;
@@ -321,27 +307,13 @@ const CancelBtn = styled.button`
   }
 `;
 
-// const CloseBtn = styled.button`
-//   background-color: transparent;
-//   border: none;
-//   font-size: 24px;
-//   cursor: pointer;
-//   color: #f44336;
-//   transition: all 0.2s ease;
-
-//   &:hover {
-//     color: #b71c1c;
-//     transform: scale(1.1);
-//   }
-// `;
-
 const ActionsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   padding: 0 10px;
-  gap: 40px; // Increased the gap from 20px to 40px
+  gap: 40px;
 `;
 
 const Input = styled.input`
@@ -359,12 +331,10 @@ const Input = styled.input`
 
 const ScrollContainer = styled.div`
   overflow-y: auto;
-  max-height: calc(100vh - 340px); // Adjust the height calculation
+  max-height: calc(100vh - 340px);
 
   @media (max-width: 768px) {
-    max-height: calc(
-      100vh - 400px
-    ); // Adjust the height calculation for smaller screens
+    max-height: calc(100vh - 400px);
   }
 `;
 export default EditProfileModal;

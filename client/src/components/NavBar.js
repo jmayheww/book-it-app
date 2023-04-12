@@ -60,8 +60,7 @@ const Wrapper = styled.header`
   box-sizing: border-box;
   width: 100%;
   height: 70px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); // Added box-shadow
-
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   @media screen and (max-width: 768px) {
     flex-direction: column;
     height: auto;
@@ -122,7 +121,7 @@ const Nav = styled.nav`
 
 const BackButton = styled(Button)`
   background-color: transparent;
-  color: #f1faee; // Updated font color
+  color: #f1faee;
   font-weight: bold;
   font-size: 16px;
   padding: 10px;

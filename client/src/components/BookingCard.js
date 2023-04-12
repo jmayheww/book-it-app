@@ -5,7 +5,6 @@ import EditBookingModal from "./EditBookingModal";
 import UserContext from "../context/userAuth";
 
 function BookingCard({ booking }) {
-  console.log("booking: ", booking);
   const [showEditModal, setShowEditModal] = useState(false);
   const [errors, setErrors] = useState([]);
   const { userBookings, setUserBookings } = useContext(UserContext);

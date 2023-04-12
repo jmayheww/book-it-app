@@ -14,11 +14,11 @@ function MyAccount() {
   // reset client route if user refreshes page while in modal
   useEffect(() => {
     navigate("/myaccount");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function activateDeleteAccountModal() {
     setIsDeleteOpen(true);
-    console.log("Delete Account Clicked");
   }
 
   return (
@@ -30,9 +30,6 @@ function MyAccount() {
         </Wrapper>
         <Outlet />
       </MyAccountContainer>
-      {/* <Routes>
-        <Route path="/edit" element={<EditProfileModal />} />
-      </Routes> */}
 
       <IrreversibleButton onClick={activateDeleteAccountModal}>
         Delete Account
@@ -48,8 +45,8 @@ const MyAccountContainer = styled.div`
 `;
 
 const IrreversibleButton = styled.button`
-  background-color: #1d3557; // Updated background color to match NavBar
-  color: #f1faee; // Updated font color to match NavBar's BackButton
+  background-color: #1d3557;
+  color: #f1faee;
   border: none;
   border-radius: 8px;
   padding: 12px 24px;
@@ -58,7 +55,7 @@ const IrreversibleButton = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #12344d; // Updated hover background color for better contrast
+    background-color: #12344d;
     cursor: pointer;
     transform: scale(1.05);
   }

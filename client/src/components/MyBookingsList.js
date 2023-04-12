@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 function MyBookingsList() {
   const { userBookings } = useContext(UserContext);
-  console.log("userBookings: ", userBookings);
+
   const currentDate = new Date();
 
   const upcomingBookings = userBookings

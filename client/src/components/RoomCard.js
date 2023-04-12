@@ -12,7 +12,6 @@ function RoomCard({ room, hotelId }) {
     description,
     price_per_night,
     image_url,
-    is_available,
     number_of_guests,
   } = room;
 
@@ -23,8 +22,6 @@ function RoomCard({ room, hotelId }) {
     setErrors([]);
     setShowBookingModal(true);
     navigate(`/hotels/${hotelId}/rooms/${id}`);
-
-    console.log("BOOKED!");
   }
 
   return (
@@ -39,9 +36,6 @@ function RoomCard({ room, hotelId }) {
           <RoomPrice>${price_per_night} per night</RoomPrice>
           <RoomDetails>
             <MaxGuests>Max guests: {number_of_guests}</MaxGuests>
-            <Availability>
-              {is_available ? "Available" : "Not Available"}
-            </Availability>
           </RoomDetails>
           <BookingButton onClick={handleBookingModal}>
             Book this room!
@@ -125,11 +119,6 @@ const RoomDetails = styled.div`
 const MaxGuests = styled.span`
   font-size: 0.9rem;
   color: #6c757d;
-`;
-
-const Availability = styled.span`
-  font-size: 0.9rem;
-  color: ${(props) => (props.available ? "#49beb7" : "#f67280")};
 `;
 
 const BookingButton = styled.button`
