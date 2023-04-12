@@ -1,4 +1,132 @@
-# Project Template: React/Rails API
+# Welcome to the Book-It Hotel Booking App
+
+### An intuitive and user-friendly hotel booking platform
+
+> Use Book-It to discover and book your ideal hotel room
+
+<p>
+
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+
+- [GitHub repository](#github-repository)
+  - [Project Philosophy](#project-philosophy)
+  - [General User Experience](#general-user-experience)
+  - [Specific Features](#specific-features)
+  - [Installation and Set-up Guide](#installation-and-set-up-guide)
+  - [How to Use](#how-to-use)
+  - [Resources and Documentation](#resources-and-documentation)
+  - [Technologies Used](#technologies-used)
+    - [Languages and Frameworks](#languages-and-frameworks)
+    - [Package Installations](#package-installations)
+  - [Author](#author)
+
+## GitHub repository
+
+- [Book-It Hotel Booking App repository](https://github.com/YOUR_USERNAME/book-it-app)
+
+## Project Philosophy
+
+Book-It is designed to streamline the process of finding and booking hotel rooms. With a focus on simplicity and efficiency, the app provides users with a collection of hotels, allowing them to easily view and compare individual hotel pages with additional details about the hotel and available rooms. Book-It aims to make booking hotel rooms a seamless and enjoyable experience.
+
+## General User Experience
+
+Book-It offers users the ability to browse through a collection of hotels, view individual hotel pages, and access detailed information about each hotel and its available rooms. Users can book a room by selecting their preferred check-in and check-out dates and specifying the number of guests. Bookings are subsequently displayed and saved to a user's personal and private account profile page. There, the four most recently past and upcoming bookings are displayed for a user to view as an abbreviated set of information about the hotel, hotel room, number of guests, and dates registerd in the booking. Users may also edit or cancel bookings from within their profile account page at their convenience.
+
+## Specific Features
+
+- View and browse a collection of hotels
+- Access individual hotel pages containing additional details about the hotel and available rooms
+- Book select hotel rooms by specifying check-in and check-out dates and the number of guests
+- View user account page with profile details and interactive booking history
+
+## Installation and Set-up Guide
+
+1. Fork and clone the repository:
+
+   ```
+   git clone https://github.com/YOUR_USERNAME/book-it-app
+   ```
+
+2. Navigate to the frontend directory (inside the "client" folder) and install all required packages:
+
+   ```
+   cd book-it-app/client
+   npm install
+   ```
+
+3. Launch the frontend app locally at the default port (3000):
+
+   ```
+   npm start
+   ```
+
+4. In a separate terminal, navigate to the backend directory (inside the "server" folder) and install all required gems:
+
+   ```
+   cd book-it-app/server
+   bundle install
+   ```
+
+5. Set up the database and seed data:
+
+   ```
+   rails db:create
+   rails db:migrate
+   rails db:seed
+   ```
+
+6. Start the backend server:
+
+   ```
+   rails server
+   ```
+
+7. Visit http://localhost:3000 in your browser to use the app.
+
+## How to Use
+
+**walkthrough video**
+
+## Resources and Documentation
+
+- [React.js documentation](https://reactjs.org/docs/getting-started.html)
+- [Create-React-App documentation](https://create-react-app.dev/)
+- [Ruby documentation](https://www.ruby-lang.org/en/documentation/)
+- [Ruby on Rails documentation](https://guides.rubyonrails.org/)
+- [Active Record Basics](https://guides.rubyonrails.org/active_record_basics.html)
+- [Active Record Querying](https://guides.rubyonrails.org/active_record_querying.html)
+
+## Technologies Used
+
+> Book-It utilizes a modern and responsive user interface powered by React.js in the frontend, which allows for efficient rendering of dynamic components and seamless user interactions.
+> The backend is constructed with Ruby on Rails, which provides a robust and flexible API to manage data requests, database interactions, and authentication.
+
+### Languages and Frameworks
+
+- HTML
+- CSS
+- JavaScript
+- React/JSX
+- Ruby
+- Ruby on Rails
+
+### Main Package Installations
+
+- Create-React-App
+- React-Router
+- Rails
+- bcrypt (for user authentication)
+- Faker (seed data for testing)
+- Active Model Serializers (for JSON serialization)
+
+## Author
+
+👤 **Joshua Mayhew**
+
+- Github: [@jmayheww](https://github.com/jmayheww)
+- LinkedIn: [@joshua-mayhew](https://www.linkedin.com/in/joshua-mayhew-28883a89/)
+
+<!-- # Project Template: React/Rails API
 
 ## Description
 
@@ -9,7 +137,7 @@ backend together, and easily deploy them to Render.
 SQLite, you will need to make the following changes in the project files:
 
 1. In the `Gemfile`, replace `gem 'pg', '~> 1.1'` with `gem 'sqlite3', '~>
-   1.4'`.
+1.4'`.
 2. In the `database.yml` file, change the line `adapter: postgresql` to
    `adapter: sqlite3`.
 
@@ -287,11 +415,11 @@ brew services start postgresql
 ### Set Up a Render Account
 
 You can sign up for a free account at
-[https://dashboard.render.com/register][Render signup]. We recommend that you
+[https://dashboard.render.com/register][render signup]. We recommend that you
 sign up using GitHub as that will make it a little easier for you to connect
 Render to your GitHub account. The instructions below assume you've done that.
 
-[Render signup]: https://dashboard.render.com/register
+[render signup]: https://dashboard.render.com/register
 
 Once you've completed the signup process, you will be taken to the Render
 dashboard. In order to connect Render to your GitHub account, you'll need to
@@ -348,4 +476,4 @@ troubleshoot:
 ## Resources
 
 - [Getting Started with Ruby on Rails on Render](https://render.com/docs/deploy-rails)
-- [Render Databases Guide](https://render.com/docs/databases)
+- [Render Databases Guide](https://render.com/docs/databases) -->
