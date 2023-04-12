@@ -11,12 +11,12 @@ function MyBookingsList() {
   const upcomingBookings = userBookings
     ?.filter((booking) => new Date(booking.check_in) > currentDate)
     .sort((a, b) => new Date(a.check_in) - new Date(b.check_in))
-    .slice(0, 4);
+    .slice(0, 3);
 
   const pastBookings = userBookings
     ?.filter((booking) => new Date(booking.check_in) < currentDate)
     .sort((a, b) => new Date(a.check_in) - new Date(b.check_in))
-    .slice(0, 4);
+    .slice(0, 3);
 
   const renderUpcomingBookings = upcomingBookings?.map((booking) => {
     return <BookingCard key={booking.id} booking={booking} />;

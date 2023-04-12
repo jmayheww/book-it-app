@@ -3,10 +3,12 @@ import styled from "styled-components";
 import { Button } from "../styles";
 import UserContext from "../context/userAuth";
 import EditProfileModal from "./EditProfileModal";
+import DeleteAccountModal from "./DeleteAccountModal";
 
 function UserProfileCard() {
   const { user } = useContext(UserContext);
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   if (!user) return null;
 
@@ -28,7 +30,10 @@ function UserProfileCard() {
 
   function handleEditClick() {
     setIsEditOpen(true);
-    console.log("Edit Clicked");
+  }
+
+  function handleDeleteAccountClick() {
+    setIsDeleteOpen(true);
   }
 
   return (
@@ -71,65 +76,21 @@ function UserProfileCard() {
             <Value>{nationality}</Value>
           </InfoRow>
         </InfoWrapper>
-        <EditButton onClick={() => handleEditClick()}>Edit Profile</EditButton>
+        <ButtonsContainer>
+          <EditButton onClick={handleEditClick}>Edit Profile</EditButton>
+          <DeleteAccountButton onClick={handleDeleteAccountClick}>
+            Delete Account
+          </DeleteAccountButton>
+        </ButtonsContainer>
 
         {isEditOpen && <EditProfileModal setIsEditOpen={setIsEditOpen} />}
+        {isDeleteOpen && (
+          <DeleteAccountModal setIsDeleteOpen={setIsDeleteOpen} />
+        )}
       </ProfileWrapper>
     </PageWrapper>
   );
 }
-
-// const PageWrapper = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 100vh;
-//   padding: 16px;
-// `;
-
-// const ProfileWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   background-color: #f8f9fa;
-//   border-radius: 8px;
-//   padding: 16px;
-//   width: 100%;
-//   max-width: 600px;
-// `;
-
-// const Avatar = styled.img`
-//   width: 150px;
-//   height: 150px;
-//   border-radius: 50%;
-//   object-fit: cover;
-//   margin-bottom: 16px;
-// `;
-
-// const Name = styled.h2`
-//   margin-bottom: 16px;
-// `;
-
-// const InfoWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 8px;
-//   width: 100%;
-// `;
-
-// const InfoRow = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(4, 1fr);
-//   gap: 8px;
-// `;
-
-// const Label = styled.span`
-//   font-weight: bold;
-// `;
-
-// const Value = styled.span`
-//   font-weight: normal;
-// `;
 
 const Avatar = styled.img`
   width: 150px;
@@ -158,17 +119,6 @@ const Value = styled.span`
   color: #f8f9fa;
 `;
 
-// const PageWrapper = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 60vh;
-
-//   padding: 16px;
-//   background-color: #f7f7f7;
-//   overflow-y: hidden;
-// `;
-
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -178,18 +128,6 @@ const PageWrapper = styled.div`
   background-color: #f7f7f7;
   overflow-y: hidden;
 `;
-
-// const ProfileWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   background-color: #49beb7;
-//   border-radius: 8px;
-//   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-//   padding: 24px;
-//   width: 100%;
-//   max-width: 600px;
-// `;
 
 const ProfileWrapper = styled.div`
   display: flex;
@@ -206,7 +144,7 @@ const ProfileWrapper = styled.div`
 const Name = styled.h2`
   margin-bottom: 24px;
   font-size: 1.8rem;
-  color: #fefefe; // Text color
+  color: #fefefe;
 `;
 
 const Label = styled.span`
@@ -214,17 +152,46 @@ const Label = styled.span`
   color: #f8f9fa;
 `;
 
-const EditButton = styled(Button)`
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
   margin-top: 24px;
+`;
+
+const EditButton = styled(Button)`
   background-color: white;
   border-color: #f67280;
   border: 2px solid #f67280;
-  color: #f67280; // Text color
+  color: #f67280;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
 
   &:hover {
     box-shadow: 0 10px 20px -10px rgba(230, 57, 70, 0.6);
     color: white;
     background: #f67280;
+  }
+`;
+
+const DeleteAccountButton = styled(Button)`
+  background-color: #1d3557;
+  color: #f1faee;
+  border: 2px solid #1d3557;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #12344d;
+    cursor: pointer;
+    transform: scale(1.05);
   }
 `;
 
