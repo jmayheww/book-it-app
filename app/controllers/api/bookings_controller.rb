@@ -1,6 +1,6 @@
 class Api::BookingsController < ApplicationController
   include ApiResource
-  before_action :set_current_user, only: %i[update destroy]
+  before_action :set_current_user, only: %i[create update destroy]
   before_action :set_booking, only: %i[update destroy]
   before_action :authorize_user, only: %i[update destroy]
 
@@ -8,8 +8,13 @@ class Api::BookingsController < ApplicationController
   rescue_from ActiveRecord::RecordNotUnique, with: :render_unique_violation_response
 
   def create
-    new_booking = Booking.create!(booking_params)
-    render json: new_booking, status: :created
+    if @current_user
+
+      new_booking = Booking.create!(booking_params)
+      render json: new_booking, status: :created
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
+    end
   end
 
   def update
