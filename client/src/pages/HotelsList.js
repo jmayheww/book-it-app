@@ -11,7 +11,7 @@ function HotelsList({ hotels }) {
     <>
       <div className="hotels-container">
         <HotelsListContainer>
-          {hotels ? renderHotels : "Loading..."}
+          {hotels && hotels.length > 0 ? renderHotels : "Loading..."}
         </HotelsListContainer>
         <div className="hotel-detail"></div>
       </div>

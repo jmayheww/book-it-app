@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
 
       if user&.authenticate(params[:password])
         session[:user_id] = user.id
-        render json: user, status: :created
+        render json: user, include: ['bookings', 'bookings.room', 'bookings.room.hotel'], status: :created
       else
         render json: { error: 'Invalid email or password' }, status: :unauthorized
       end
