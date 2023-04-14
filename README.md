@@ -85,7 +85,7 @@ Book-It offers users the ability to browse through a collection of hotels, view 
 
 ## How to Use
 
-**walkthrough video**
+**https://youtu.be/3mr2V_yodfk**
 
 ## Resources and Documentation
 
