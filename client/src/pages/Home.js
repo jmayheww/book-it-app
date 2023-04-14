@@ -12,9 +12,16 @@ function Home() {
       <Heading>Welcome{firstName && `, ${firstName}`}</Heading>
       <SubHeading>Discover the Best Hotels</SubHeading>
       <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at
-        hendrerit urna, sed finibus ipsum. Sed euismod leo ut libero pretium
-        pharetra. Aliquam ut maximus ex.
+        Looking for a place to stay during your travels? Look no further than
+        Book-It! Our app provides users with a collection of the best hotels to
+        choose from. Whether you're looking for luxury accommodations or
+        something more budget-friendly, Book-It has a wide variety of options to
+        meet your needs. Each hotel page includes specific details about the
+        hotel and available rooms, so you can easily compare and select your
+        preferred option. Plus, booking a room is easy - simply specify your
+        check-in and check-out dates and the number of guests, and we'll take
+        care of the rest. With Book-It, you'll find the perfect place to stay
+        for your next trip.
       </Paragraph>
       <ButtonWrapper>
         <Button as={Link} to="/hotels">

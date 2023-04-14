@@ -22,7 +22,7 @@
 
 ## GitHub repository
 
-- [Book-It Hotel Booking App repository](https://github.com/YOUR_USERNAME/book-it-app)
+- [Book-It Hotel Booking App repository](https://github.com/jmayheww/book-it-app)
 
 ## Project Philosophy
 
@@ -30,21 +30,21 @@ Book-It is designed to streamline the process of finding and booking hotel rooms
 
 ## General User Experience
 
-Book-It offers users the ability to browse through a collection of hotels, view individual hotel pages, and access detailed information about each hotel and its available rooms. Users can book a room by selecting their preferred check-in and check-out dates and specifying the number of guests. Bookings are subsequently displayed and saved to a user's personal and private account profile page. There, the four most recently past and upcoming bookings are displayed for a user to view as an abbreviated set of information about the hotel, hotel room, number of guests, and dates registerd in the booking. Users may also edit or cancel bookings from within their profile account page at their convenience.
+Book-It offers users the ability to browse through a collection of hotels, view individual hotel pages, and access detailed information about each hotel and its available rooms. Users can book a room by selecting their preferred check-in and check-out dates and specifying the number of guests. Bookings are subsequently displayed and saved to a user's private, personal account page. There, the three most recently past and upcoming bookings are displayed for a user to view as an abbreviated set of information about the hotel, hotel room, number of guests, and dates registered in the booking. Users may also edit or cancel bookings from within their respective account page per their convenience.
 
 ## Specific Features
 
 - View and browse a collection of hotels
-- Access individual hotel pages containing additional details about the hotel and available rooms
+- Access individual hotel pages containing specific details about the hotel and available rooms
 - Book select hotel rooms by specifying check-in and check-out dates and the number of guests
-- View user account page with profile details and interactive booking history
+- View user account page with profile details and interactive booking summaries
 
 ## Installation and Set-up Guide
 
 1. Fork and clone the repository:
 
    ```
-   git clone https://github.com/YOUR_USERNAME/book-it-app
+   git clone https://github.com/jmayheww/book-it-app
    ```
 
 2. Navigate to the frontend directory (inside the "client" folder) and install all required packages:
@@ -54,16 +54,16 @@ Book-It offers users the ability to browse through a collection of hotels, view 
    npm install
    ```
 
-3. Launch the frontend app locally at the default port (3000):
+3. Launch the frontend app locally at the default port (4000):
 
    ```
-   npm start
+   npm start --prefix client
    ```
 
-4. In a separate terminal, navigate to the backend directory (inside the "server" folder) and install all required gems:
+4. In a separate terminal, navigate to the main project directory and install all required gems:
 
    ```
-   cd book-it-app/server
+   cd book-it-app
    bundle install
    ```
 
@@ -81,7 +81,7 @@ Book-It offers users the ability to browse through a collection of hotels, view 
    rails server
    ```
 
-7. Visit http://localhost:3000 in your browser to use the app.
+7. Visit http://localhost:4000 in your browser to use the app.
 
 ## How to Use
 
@@ -99,6 +99,7 @@ Book-It offers users the ability to browse through a collection of hotels, view 
 ## Technologies Used
 
 > Book-It utilizes a modern and responsive user interface powered by React.js in the frontend, which allows for efficient rendering of dynamic components and seamless user interactions.
+
 > The backend is constructed with Ruby on Rails, which provides a robust and flexible API to manage data requests, database interactions, and authentication.
 
 ### Languages and Frameworks
