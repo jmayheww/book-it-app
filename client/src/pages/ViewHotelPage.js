@@ -43,7 +43,7 @@ function ViewHotelPage({ hotels }) {
             </HotelDetails>
           </HotelInfo>
           <RoomsList>
-            {hotelRooms.map((room) => {
+            {hotelRooms?.map((room) => {
               return (
                 <RoomCard key={room.id} room={room} hotelId={viewHotel.id} />
               );
