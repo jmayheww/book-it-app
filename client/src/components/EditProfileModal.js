@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { Error } from "../styles/index";
 import { RiCloseLine } from "react-icons/ri";
 import UserContext from "../context/userAuth";
 
 function EditProfileModal({ setIsEditOpen }) {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, errors, setErrors } = useContext(UserContext);
   const [updatedUser, setUpdatedUser] = useState({ ...user });
+  console.log("updatedUser: ", updatedUser);
 
   function handleChange(e) {
     setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
@@ -18,17 +20,28 @@ function EditProfileModal({ setIsEditOpen }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedUser),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setUser(data);
-      });
+    }).then((resp) => {
+      if (resp.ok) {
+        return resp.json().then((data) => {
+          console.log("data: ", data);
+          setUser(data);
+          setIsEditOpen(false);
+        });
+      } else {
+        return resp.json().then((data) => {
+          if (data.errors) {
+            setErrors(data.errors);
+          } else {
+            setErrors([data.error]);
+          }
+        });
+      }
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     updateUser();
-    setIsEditOpen(false);
   }
 
   function handleCloseClick() {
@@ -132,6 +145,17 @@ function EditProfileModal({ setIsEditOpen }) {
                 </FormGroup>
 
                 <FormGroup>
+                  <label>Nationality:</label>
+                  <Input
+                    type="text"
+                    name="nationality"
+                    placeholder="Nationality"
+                    value={updatedUser?.nationality || ""}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+
+                <FormGroup>
                   <label>Passport Number:</label>
                   <Input
                     type="text"
@@ -169,6 +193,13 @@ function EditProfileModal({ setIsEditOpen }) {
                 </ActionsContainer>
               </form>
             </ScrollContainer>
+            {errors.length > 0 && (
+              <ErrorsWrapper>
+                {errors.map((error, index) => {
+                  return <Error key={index}>{error}</Error>;
+                })}
+              </ErrorsWrapper>
+            )}
           </ModalContent>
         </Modal>
       </ModalWrapper>
@@ -177,17 +208,15 @@ function EditProfileModal({ setIsEditOpen }) {
 }
 const ModalWrapper = styled.div`
   position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -10%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 101;
-
-  @media (max-width: 768px) {
-    top: 30%;
-  }
+  padding: 80px 20px;
 `;
 const DarkBG = styled.div`
   position: fixed;
@@ -206,17 +235,12 @@ const Modal = styled.div`
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   z-index: 20;
-  width: 50%;
+  width: 100%;
   max-width: 600px;
-  min-width: 500px;
-  max-height: 80%;
+  max-height: 100%;
   overflow-y: auto;
-
-  @media (max-width: 768px) {
-    max-height: calc(100% - 40px);
-    padding: 20px;
-    border-radius: 0;
-  }
+  display: flex;
+  flex-direction: column;
 `;
 const ModalHeader = styled.div`
   position: absolute;
@@ -331,10 +355,12 @@ const Input = styled.input`
 
 const ScrollContainer = styled.div`
   overflow-y: auto;
-  max-height: calc(100vh - 340px);
-
-  @media (max-width: 768px) {
-    max-height: calc(100vh - 400px);
-  }
+  max-height: calc(100% - 120px);
+  flex-grow: 1;
 `;
+
+const ErrorsWrapper = styled.div`
+  margin-top: 1rem;
+`;
+
 export default EditProfileModal;

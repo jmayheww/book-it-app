@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :users, only: %i[show create update destroy]
+    resources :users, only: %i[index show create update destroy]
 
     resources :hotels, only: %i[index]
 
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
     get '/me', to: 'users#show'
+    get '/bookings/number_of_guests/:n', to: 'bookings#by_number_of_guests'
   end
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

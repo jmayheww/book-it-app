@@ -11,6 +11,12 @@ class Api::UsersController < ApplicationController
     render json: new_user, status: :created
   end
 
+  def index
+    users = User.all
+
+    render json: users, status: :ok
+  end
+
   def show
     if @current_user
       render json: @current_user, include: ['bookings', 'bookings.room', 'bookings.room.hotel'], status: :created
@@ -50,7 +56,7 @@ class Api::UsersController < ApplicationController
 
   def profile_params
     params.permit(:first_name, :last_name, :phone_number, :address, :city, :state, :country,
-                  :passport_number, :date_of_birth, :avatar_url, :email)
+                  :passport_number, :date_of_birth, :avatar_url, :email, :nationality)
   end
 
   def render_record_not_found_response(exception)

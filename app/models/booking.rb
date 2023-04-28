@@ -10,6 +10,12 @@ class Booking < ApplicationRecord
   validate :check_out_is_after_check_in
   validate :booking_date_in_past
 
+  def self.by_number_of_guests(params)
+    bookings = all.where('number_of_guests > ?', params)
+
+    bookings.map { |booking| booking.room.hotel }.uniq
+  end
+
   private
 
   def booking_date_in_past

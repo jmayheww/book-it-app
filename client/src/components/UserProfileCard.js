@@ -6,7 +6,7 @@ import EditProfileModal from "./EditProfileModal";
 import DeleteAccountModal from "./DeleteAccountModal";
 
 function UserProfileCard() {
-  const { user } = useContext(UserContext);
+  const { user, setErrors } = useContext(UserContext);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -23,12 +23,14 @@ function UserProfileCard() {
     city,
     state,
     country,
-    age,
     date_of_birth,
     nationality,
   } = user;
 
+  console.log("nationality:", nationality);
+
   function handleEditClick() {
+    setErrors([]);
     setIsEditOpen(true);
   }
 
@@ -66,8 +68,6 @@ function UserProfileCard() {
           <InfoRow>
             <Label>Passport:</Label>
             <Value>{passport_number}</Value>
-            <Label>Age:</Label>
-            <Value>{age}</Value>
           </InfoRow>
           <InfoRow>
             <Label>Date of Birth:</Label>

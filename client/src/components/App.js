@@ -14,7 +14,7 @@ const AsyncViewHotelPage = React.lazy(() => import("../pages/ViewHotelPage"));
 
 function App() {
   const { user, fetchCurrentUser } = useContext(UserContext);
-  const [hotels, sethotels] = useState([]);
+  const [hotels, setHotels] = useState(null);
   const location = useLocation();
   const showBackButton = location.pathname.includes("/hotels/");
 
@@ -22,7 +22,7 @@ function App() {
     fetch("/api/hotels")
       .then((resp) => resp.json())
       .then((data) => {
-        sethotels(data);
+        setHotels(data);
       });
   }
 

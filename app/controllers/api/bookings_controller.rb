@@ -27,6 +27,19 @@ class Api::BookingsController < ApplicationController
     render json: { message: 'Booking deleted' }, status: :ok
   end
 
+  def by_number_of_guests
+    qualifying_bookings = Booking.by_number_of_guests(params[:n])
+
+    if !qualifying_bookings.empty?
+
+      render json: qualifying_bookings, status: :ok
+
+    else
+
+      render json: { error: "No bookings were found that allow more than #{params[:n]}  guests" }
+    end
+  end
+
   private
 
   def model
