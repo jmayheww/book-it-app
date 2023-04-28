@@ -19,7 +19,9 @@ const headers = {
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState("");
+  console.log("user: ", user);
   const [userBookings, setUserBookings] = useState([]);
+  console.log("userBookings: ", userBookings);
   const [errors, setErrors] = useState([]);
   const [showLogin, setShowLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);

@@ -13,7 +13,7 @@ function EditBookingModal({
   setErrors,
 }) {
   const [updateBooking, setUpdateBooking] = useState(booking);
-  const { userBookings, setUserBookings } = useContext(UserContext);
+  const { userBookings, setUserBookings, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleCloseClick() {
@@ -34,6 +34,7 @@ function EditBookingModal({
       }
     });
     setUserBookings(updatedBooking);
+    setUser((prev) => ({ ...prev, bookings: updatedBooking }));
   }
 
   function handleSubmitUpdate(e) {

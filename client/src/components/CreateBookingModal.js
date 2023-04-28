@@ -13,7 +13,7 @@ function CreateBookingModal({
   setErrors,
   navigate,
 }) {
-  const { user, setUserBookings } = useContext(UserContext);
+  const { user, setUser, setUserBookings } = useContext(UserContext);
 
   const initialValue = {
     user_id: user?.id,
@@ -38,6 +38,8 @@ function CreateBookingModal({
     }).then((resp) => {
       if (resp.ok) {
         return resp.json().then((data) => {
+          console.log("data: ", data);
+          setUser((prev) => ({ ...prev, bookings: [...prev.bookings, data] }));
           setUserBookings((prev) => [...prev, data]);
           setBooking(initialValue);
           setShowBookingModal(false);

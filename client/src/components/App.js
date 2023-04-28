@@ -13,7 +13,8 @@ const AsyncHotelsList = React.lazy(() => import("../pages/HotelsList"));
 const AsyncViewHotelPage = React.lazy(() => import("../pages/ViewHotelPage"));
 
 function App() {
-  const { user, fetchCurrentUser } = useContext(UserContext);
+  const { user, setUser, setUserBookings, fetchCurrentUser } =
+    useContext(UserContext);
   const [hotels, setHotels] = useState(null);
   const location = useLocation();
   const showBackButton = location.pathname.includes("/hotels/");
@@ -32,6 +33,12 @@ function App() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // empty dependency array
+
+  // useEffect(() => {
+  //   if (user) {
+  //     setUser((prev) => ({ ...prev, bookings: user.bookings }));
+  //   }
+  // }, [user, setUser]);
 
   return (
     <div className="App">

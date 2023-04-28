@@ -7,7 +7,7 @@ import UserContext from "../context/userAuth";
 function BookingCard({ booking }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [errors, setErrors] = useState([]);
-  const { userBookings, setUserBookings } = useContext(UserContext);
+  const { userBookings, setUserBookings, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleEditClick() {
@@ -21,6 +21,7 @@ function BookingCard({ booking }) {
     });
 
     setUserBookings(updatedBookings);
+    setUser((prev) => ({ ...prev, bookings: updatedBookings }));
   }
 
   function handleDeleteClick() {
