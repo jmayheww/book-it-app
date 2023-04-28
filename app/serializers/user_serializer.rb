@@ -3,4 +3,5 @@ class UserSerializer < ActiveModel::Serializer
              :date_of_birth, :avatar_url, :nationality
 
   has_many :bookings
+  has_many :rooms, through: :bookings
 end

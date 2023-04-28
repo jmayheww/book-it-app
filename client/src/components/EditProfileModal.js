@@ -7,7 +7,6 @@ import UserContext from "../context/userAuth";
 function EditProfileModal({ setIsEditOpen }) {
   const { user, setUser, errors, setErrors } = useContext(UserContext);
   const [updatedUser, setUpdatedUser] = useState({ ...user });
-  console.log("updatedUser: ", updatedUser);
 
   function handleChange(e) {
     setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
@@ -23,7 +22,6 @@ function EditProfileModal({ setIsEditOpen }) {
     }).then((resp) => {
       if (resp.ok) {
         return resp.json().then((data) => {
-          console.log("data: ", data);
           setUser(data);
           setIsEditOpen(false);
         });
