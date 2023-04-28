@@ -7,7 +7,8 @@ import UserContext from "../context/userAuth";
 function BookingCard({ booking }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [errors, setErrors] = useState([]);
-  const { userBookings, setUserBookings, setUser } = useContext(UserContext);
+  const { userBookings, setUserBookings } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   function handleEditClick() {
@@ -16,12 +17,8 @@ function BookingCard({ booking }) {
   }
 
   function handleDeletedObj(id) {
-    const updatedBookings = userBookings.filter((bk) => {
-      return bk.id !== id;
-    });
-
+    const updatedBookings = userBookings.filter((booking) => booking.id !== id);
     setUserBookings(updatedBookings);
-    setUser((prev) => ({ ...prev, bookings: updatedBookings }));
   }
 
   function handleDeleteClick() {

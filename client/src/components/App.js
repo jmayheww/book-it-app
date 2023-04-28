@@ -11,11 +11,12 @@ const AsyncMyAccount = React.lazy(() => import("../pages/MyAccount"));
 const AsyncLogin = React.lazy(() => import("../pages/Login"));
 const AsyncHotelsList = React.lazy(() => import("../pages/HotelsList"));
 const AsyncViewHotelPage = React.lazy(() => import("../pages/ViewHotelPage"));
+const AsyncAdminPage = React.lazy(() => import("../pages/Admin"));
 
 function App() {
-  const { user, setUser, setUserBookings, fetchCurrentUser } =
-    useContext(UserContext);
+  const { user, fetchCurrentUser, isAdmin } = useContext(UserContext);
   const [hotels, setHotels] = useState(null);
+
   const location = useLocation();
   const showBackButton = location.pathname.includes("/hotels/");
 
@@ -32,13 +33,7 @@ function App() {
     getHotels();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // empty dependency array
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setUser((prev) => ({ ...prev, bookings: user.bookings }));
-  //   }
-  // }, [user, setUser]);
+  }, []);
 
   return (
     <div className="App">
@@ -66,6 +61,14 @@ function App() {
             >
               <Route path="rooms/:room_id" element={<CreateBookingModal />} />
             </Route>
+
+            {isAdmin && (
+              <Route
+                exact
+                path="/admin"
+                element={<AsyncAdminPage hotels={hotels} />}
+              />
+            )}
 
             {!user && (
               <>

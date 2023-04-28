@@ -5,18 +5,13 @@ Booking.destroy_all
 
 puts 'seeding data...'
 
-# Create 5 unique users
+# Create 10 unique users
 
-5.times do
+10.times do
   User.create(
     email: Faker::Internet.email,
     password: 'password',
     password_confirmation: 'password',
-    created_at: Time.now,
-    updated_at: Time.now
-  )
-
-  User.update(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     phone_number: Faker::PhoneNumber.cell_phone,
@@ -27,7 +22,9 @@ puts 'seeding data...'
     age: rand(18..100),
     nationality: Faker::Nation.nationality,
     passport_number: Faker::Number.number(digits: 10),
-    date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65)
+    date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 65),
+    created_at: Time.now,
+    updated_at: Time.now
   )
 end
 
@@ -384,7 +381,7 @@ Room.insert_all(rooms)
 # create 10 random bookings
 
 bookings = []
-10.times do
+30.times do
   room = Room.all.sample
   user = User.all.sample
   bookings << {

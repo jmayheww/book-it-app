@@ -6,7 +6,7 @@ import { Button } from "../styles/index";
 import UserContext from "../context/userAuth";
 
 function NavBar({ showBackButton }) {
-  const { logoutUser } = useContext(UserContext);
+  const { logoutUser, isAdmin } = useContext(UserContext);
   const navigate = useNavigate();
 
   function handleLogoutClick() {
@@ -37,6 +37,11 @@ function NavBar({ showBackButton }) {
         <Button as={Link} to="/hotels">
           Hotels
         </Button>
+        {isAdmin && (
+          <Button as={Link} to="/admin">
+            Admin
+          </Button>
+        )}
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>

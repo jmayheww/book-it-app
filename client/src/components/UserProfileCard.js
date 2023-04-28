@@ -27,8 +27,6 @@ function UserProfileCard() {
     nationality,
   } = user;
 
-  console.log("nationality:", nationality);
-
   function handleEditClick() {
     setErrors([]);
     setIsEditOpen(true);

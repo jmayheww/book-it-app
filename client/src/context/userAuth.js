@@ -19,10 +19,11 @@ const headers = {
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState("");
-  console.log("user: ", user);
+
   const [userBookings, setUserBookings] = useState([]);
-  console.log("userBookings: ", userBookings);
+
   const [errors, setErrors] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -61,6 +62,9 @@ export const UserProvider = ({ children }) => {
       r.json().then((user) => {
         setUser(user);
         setUserBookings(user.bookings);
+        user.email === "joshsmayhew@gmail.com"
+          ? setIsAdmin(true)
+          : setIsAdmin(false);
       });
     } else {
       setUser(null);
@@ -74,6 +78,9 @@ export const UserProvider = ({ children }) => {
       r.json().then((user) => {
         setUser(user);
         setUserBookings(user.bookings);
+        user.email === "joshsmayhew@gmail.com"
+          ? setIsAdmin(true)
+          : setIsAdmin(false);
         navigate("/myaccount");
       });
     } else {
@@ -107,6 +114,7 @@ export const UserProvider = ({ children }) => {
         setUser,
         userBookings,
         setUserBookings,
+        isAdmin,
         headers,
         signupUser,
         loginUser,

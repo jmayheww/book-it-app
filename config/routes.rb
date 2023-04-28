@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     resources :bookings, only: %i[create update destroy]
 
+    get '/rooms/admin', to: 'rooms#admin_index'
     post '/signup', to: 'users#create'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
